@@ -13,3 +13,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.2] - 2023-08-20
 
 - Completed the tile bag
+
+## [0.0.3] - 2023-08-23
+
+- Modify Tilebag changed to 1 single Tile with the amount
