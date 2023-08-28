@@ -24,5 +24,8 @@ All notable changes to this project will be documented in this file.
 - Added game/cell base code
 - Added game/player base code
 - Added game/scrabble base code
-
 - Added Test for each ./game/ archive
+
+## [0.0.5] - 2023-08-28
+
+- Added start game metod in game/scrabble
