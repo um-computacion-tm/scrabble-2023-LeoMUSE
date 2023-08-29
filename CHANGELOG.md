@@ -29,3 +29,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.5] - 2023-08-28
 
 - Added start game metod in game/scrabble
+
+## [0.0.6] - 2023-08-29
+
+- Added play word metod in game/player
