@@ -1,5 +1,7 @@
 import unittest
 from game.scrabble import ScrabbleGame
+from game.player import Player
+from game.models import BagTiles
 
 class TestScrabbleGame(unittest.TestCase):
     def test_init(self):
@@ -10,6 +12,14 @@ class TestScrabbleGame(unittest.TestCase):
             3,
         )
         self.assertIsNotNone(scrabble_game.bag_tiles)
+
+    def test_start_game(self):
+        player = Player()
+        game = ScrabbleGame(players_count=2)
+        game.start_game()
+
+        for player in game.players:
+            self.assertEqual(len(player.tiles), 7)
 
 if __name__ == '__main__':
     unittest.main()
