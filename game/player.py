@@ -1,4 +1,4 @@
-from game.models import Tile
+from game.tile import Tile
 
 class Player:
     def __init__(self):
