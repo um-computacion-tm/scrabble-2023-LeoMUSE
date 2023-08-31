@@ -1,17 +1,9 @@
 import unittest
 
-from game.models import (
-    BagTiles,
-    Tile,
-)
+from game.bagtile import BagTiles
+from game.tile import Tile
 
 from unittest.mock import patch
-
-class TestTiles(unittest.TestCase):
-    def test_tile(self):
-        tile = Tile('Z', 10)
-        self.assertEqual(tile.letter, 'Z')
-        self.assertEqual(tile.value, 10)
 
 class TestBagTiles(unittest.TestCase):
     @patch('random.shuffle')

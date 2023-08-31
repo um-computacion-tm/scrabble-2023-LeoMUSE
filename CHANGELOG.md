@@ -33,3 +33,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.6] - 2023-08-29
 
 - Added play word metod in game/player
+
+## [0.0.7] - 2023-08-31
+
+- separate models.py into bagtiles.py and tiles.py

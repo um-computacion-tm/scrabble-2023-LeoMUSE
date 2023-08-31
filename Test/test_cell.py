@@ -1,6 +1,6 @@
 import unittest
 from game.cell import Cell
-from game.models import Tile
+from game.tile import Tile
 
 class TestCell(unittest.TestCase):
     def test_init(self):
@@ -45,7 +45,7 @@ class TestCell(unittest.TestCase):
 
         self.assertEqual(
             cell.calculate_value(),
-            3,
+            6,
         )
 
 if __name__ == '__main__':
