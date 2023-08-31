@@ -40,12 +40,12 @@ class TestCell(unittest.TestCase):
 
     def test_cell_multiplier_word(self):
         cell = Cell(multiplier=2, multiplier_type='word')
-        letter = Tile(letter='P', value=3)
+        letter = Tile(letter='C', value=1)
         cell.add_letter(letter=letter)
 
         self.assertEqual(
             cell.calculate_value(),
-            6,
+            2,
         )
 
 if __name__ == '__main__':
