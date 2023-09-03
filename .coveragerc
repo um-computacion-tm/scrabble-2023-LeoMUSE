@@ -4,7 +4,7 @@ source =
     tests
 omit =
     env/*
-    */Test*
+    */test*
     */__init__.py
 [report]
 exclude_lines =
