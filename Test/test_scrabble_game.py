@@ -21,5 +21,17 @@ class TestScrabbleGame(unittest.TestCase):
         for player in game.players:
             self.assertEqual(len(player.tiles), 7)
 
+    def test_next_turn(self):
+        game = ScrabbleGame(players_count=3)
+        self.assertEqual(game.current_player, 0)
+        game.next_turn()
+        self.assertEqual(game.current_player, 1)
+        game.next_turn()
+        self.assertEqual(game.current_player, 2)
+        game.next_turn()
+        self.assertEqual(game.current_player, 0)
+        game.next_turn()
+        self.assertEqual(game.current_player, 1)
+
 if __name__ == '__main__':
     unittest.main()

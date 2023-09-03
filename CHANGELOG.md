@@ -38,3 +38,7 @@ All notable changes to this project will be documented in this file.
 
 - separate models.py into bagtiles.py and tiles.py
 - Added metod to calculate word value base
+
+## [0.0.8] - 2023-09-03
+
+- Added metod to change turn
