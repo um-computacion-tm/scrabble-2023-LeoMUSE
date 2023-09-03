@@ -5,7 +5,7 @@ source =
 
 omit =
     env/*
-    */Test/*
+    */test*
     */__init__.py
 
 [report]
