@@ -1,20 +1,20 @@
 [run]
 source =
     game
-    Test
+    test
 
 omit =
     env/*
-    Test/*
+    */test*
     */__init__.py
 
 [report]
 exclude_lines =
-    program: no cover
+    pragma: no cover
     def setUp
     def test_
     return raw_input
     print
     if __name__ == '__main__':
-        def suite
-        __str__
+    def suite
+    __str__
