@@ -42,3 +42,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.8] - 2023-09-03
 
 - Added metod to change turn
+
+## [0.0.9] - 2023-09-07
+
+- Added metod to verify orientation in board.py

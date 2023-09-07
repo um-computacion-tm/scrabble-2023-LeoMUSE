@@ -6,14 +6,8 @@ from game.tile import Tile
 class TestBoard(unittest.TestCase):
     def test_init(self):
         board = Board()
-        self.assertEqual(
-            len(board.grid),
-            15,
-        )
-        self.assertEqual(
-            len(board.grid[0]),
-            15,
-        )
+        self.assertEqual(len(board.grid),15,)
+        self.assertEqual(len(board.grid[0]),15,)
 
 class TestCalculateWordValue(unittest.TestCase):
     def test_simple(self):
@@ -85,6 +79,42 @@ class TestCalculateWordValue(unittest.TestCase):
         word = [cell1, cell2, cell3, cell4]
         value = Board().calculate_word_value(word)
         self.assertEqual(value, 5)
+    
+    def test_word_inside_board_H(self):
+        board = Board()
+        word = "Facultad"
+        location = (5, 4)
+        orientation = "H"
+
+        word_is_valid = board.validate_word_inside_board(word, location, orientation)
+        self.assertTrue(word_is_valid)
+    
+    def test_word_inside_board_V(self):
+        board = Board()
+        word = "Facultad"
+        location = (5, 4)
+        orientation = "V"
+
+        word_is_valid = board.validate_word_inside_board(word, location, orientation)
+        self.assertTrue(word_is_valid)
+
+    def test_word_out_of_board_H(self):
+        board = Board()
+        word = "Facultad"
+        location = (1, 14)
+        orientation = "H"
+        
+        word_is_valid = board.validate_word_inside_board(word, location, orientation)
+        self.assertFalse(word_is_valid)
+
+    def test_word_out_of_board_V(self):
+        board = Board()
+        word = "Facultad"
+        location = (14, 1)
+        orientation = "V"
+        
+        word_is_valid = board.validate_word_inside_board(word, location, orientation)
+        self.assertFalse(word_is_valid)
 
 if __name__ == '__main__':
     unittest.main()
