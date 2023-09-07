@@ -7,15 +7,12 @@ class TestScrabbleGame(unittest.TestCase):
     def test_init(self):
         scrabble_game = ScrabbleGame(players_count=3)
         self.assertIsNotNone(scrabble_game.board)
-        self.assertEqual(
-            len(scrabble_game.players),
-            3,
-        )
+        self.assertEqual(len(scrabble_game.players),3)
         self.assertIsNotNone(scrabble_game.bag_tiles)
 
     def test_start_game(self):
         player = Player()
-        game = ScrabbleGame(players_count=2)
+        game = ScrabbleGame(players_count = 3)
         game.start_game()
 
         for player in game.players:
