@@ -20,7 +20,7 @@ def validate_number_of_players():
         if is_valid_number_of_players(players):
             return players
         else:
-            print("Por favor, ingrese un numero valido (1-4).")
+            print("Por favor, ingrese un numero valido (2-4).")
 
 def main():
     print("¡Bienvenido a Scrabble!")
