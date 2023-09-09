@@ -46,3 +46,6 @@ class BagTiles:
 
     def put(self, tiles):
         self.tiles.extend(tiles)
+
+if __name__ == '__main__':
+    pass

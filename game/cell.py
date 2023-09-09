@@ -18,3 +18,6 @@ class Cell:
             return self.letter.value * self.multiplier
         else:
             return self.letter.value
+        
+if __name__ == '__main__':
+    pass

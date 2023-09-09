@@ -28,4 +28,4 @@ class TestMain(unittest.TestCase):
         self.assertIn("¡Bienvenido a Scrabble!", output)
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main

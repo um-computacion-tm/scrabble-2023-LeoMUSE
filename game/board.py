@@ -22,3 +22,6 @@ class Board:
         elif orientation == 'V' and x + len(word) > 15:
                 return False
         return orientation in ('H', 'V')
+    
+if __name__ == '__main__':
+    pass

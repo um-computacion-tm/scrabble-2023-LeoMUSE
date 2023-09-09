@@ -22,3 +22,6 @@ class ScrabbleGame:
         self.current_player += 1
         if self.current_player >= len(self.players):
             self.current_player = 0
+
+if __name__ == '__main__':
+    pass
