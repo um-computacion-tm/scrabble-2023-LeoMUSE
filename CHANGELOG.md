@@ -46,3 +46,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.9] - 2023-09-07
 
 - Added metod to verify orientation in board.py
+
+## [0.1.0] - 2023-09-09
+
+- Added Base main and tests for mian

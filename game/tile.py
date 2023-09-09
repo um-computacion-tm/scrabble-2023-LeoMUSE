@@ -3,4 +3,5 @@ class Tile:
         self.letter = letter
         self.value = value
 
-
+if __name__ == '__main__':
+    pass
