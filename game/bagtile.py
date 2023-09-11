@@ -39,6 +39,8 @@ class BagTiles:
         random.shuffle(self.tiles)
         
     def take(self, count):
+        if count > len(self.tiles):
+            raise ValueError("No hay suficientes fichas en la bolsa.")
         tiles = []
         for _ in range(count):
             tiles.append(self.tiles.pop())
