@@ -104,8 +104,8 @@ class TestCalculateWordValue(unittest.TestCase):
         location = (1, 14)
         orientation = "H"
         
-        word_is_valid = board.validate_word_inside_board(word, location, orientation)
-        self.assertFalse(word_is_valid)
+        with self.assertRaises(ValueError):
+            word_is_valid = board.validate_word_inside_board(word, location, orientation)
 
     def test_word_out_of_board_V(self):
         board = Board()
@@ -113,8 +113,8 @@ class TestCalculateWordValue(unittest.TestCase):
         location = (14, 1)
         orientation = "V"
         
-        word_is_valid = board.validate_word_inside_board(word, location, orientation)
-        self.assertFalse(word_is_valid)
+        with self.assertRaises(ValueError):
+            word_is_valid = board.validate_word_inside_board(word, location, orientation)
 
 if __name__ == '__main__':
     unittest.main()

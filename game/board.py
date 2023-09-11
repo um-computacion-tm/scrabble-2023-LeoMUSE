@@ -18,9 +18,9 @@ class Board:
     def validate_word_inside_board(self, word, location, orientation):
         x , y = location
         if orientation == 'H' and y + len(word) > 15:
-                return False
+                raise ValueError("La palabra no cabe en el tablero en la posicion especificada.")
         elif orientation == 'V' and x + len(word) > 15:
-                return False
+                raise ValueError("La palabra no cabe en el tablero en la posicion especificada.")
         return orientation in ('H', 'V')
     
 if __name__ == '__main__':
