@@ -30,5 +30,18 @@ class TestScrabbleGame(unittest.TestCase):
         game.next_turn()
         self.assertEqual(game.current_player, 1)
 
+    def test_set_time(self):
+        game = ScrabbleGame(players_count = 2)
+        game.set_time_limit(60)
+        self.assertEqual(game.turn_limit, 60)
+
+    def test_start_timer(self):
+        game = ScrabbleGame(players_count = 2)
+        game.set_time_limit(5)
+        game.start_timer()
+        import time
+        time.sleep(6)
+        self.assertEqual(game.current_player, 1)
+
 if __name__ == '__main__':
     unittest.main()

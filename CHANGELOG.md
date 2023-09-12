@@ -54,3 +54,7 @@ All notable changes to this project will be documented in this file.
 ## [0.1.1] - 2023-09-11
 
 - Added Raises ValueError for some metods.
+
+## [0.1.2] - 2023-09-12
+
+- Added all metod ralated to time in turns
