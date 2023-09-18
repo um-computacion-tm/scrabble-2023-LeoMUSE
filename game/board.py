@@ -25,11 +25,7 @@ class Board:
     
     @property
     def is_empty(self):
-        for row in self.grid:
-            for cell in row:
-                if cell.letter:
-                    return False
-        return True
+        return not any(cell.letter for row in self.grid for cell in row)
     
 if __name__ == '__main__':
     pass
