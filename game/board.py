@@ -23,5 +23,13 @@ class Board:
                 raise ValueError("La palabra no cabe en el tablero en la posicion especificada.")
         return orientation in ('H', 'V')
     
+    @property
+    def is_empty(self):
+        for row in self.grid:
+            for cell in row:
+                if cell.letter:
+                    return False
+        return True
+    
 if __name__ == '__main__':
     pass

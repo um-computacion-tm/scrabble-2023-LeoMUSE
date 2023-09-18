@@ -58,3 +58,9 @@ All notable changes to this project will be documented in this file.
 ## [0.1.2] - 2023-09-12
 
 - Added all metod ralated to time in turns
+
+## [0.1.3] - 2023-09-18
+
+- Added property is_empty to board.py
+- Deleted all main to try one better.
+- Deleted all main tests sice they are irrelevant.
