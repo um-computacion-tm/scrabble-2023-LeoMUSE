@@ -105,7 +105,7 @@ class TestCalculateWordValue(unittest.TestCase):
         orientation = "H"
         
         with self.assertRaises(ValueError):
-            word_is_valid = board.validate_word_inside_board(word, location, orientation)
+            board.validate_word_inside_board(word, location, orientation)
 
     def test_word_out_of_board_V(self):
         board = Board()
@@ -114,7 +114,65 @@ class TestCalculateWordValue(unittest.TestCase):
         orientation = "V"
         
         with self.assertRaises(ValueError):
-            word_is_valid = board.validate_word_inside_board(word, location, orientation)
+            board.validate_word_inside_board(word, location, orientation)
+
+    def test_board_is_empty(self):
+        board = Board()
+        assert board.is_empty == True
+
+    def test_board_is_not_empty(self):
+        board = Board()
+        board.grid[7][7].add_letter(Tile('C', 1))
+        assert board.is_empty == False      
+
+    def test_place_word_empty_board_H_fine(self):
+        board = Board()
+        word = "Facultad"
+        location = (4, 7)
+        orientation = "H"
+
+        word_is_valid = board.validate_word_inside_board(word, location, orientation)
+        self.assertTrue(word_is_valid)
+
+    def test_place_word_empty_board_H_worng(self):
+        board = Board()
+        word = "Facultad"
+        location = (1, 14)
+        orientation = "H"
+
+        with self.assertRaises(ValueError):
+            board.validate_word_inside_board(word, location, orientation)
+
+    def test_place_word_empty_board_V_fine(self):
+        board = Board()
+        word = "Facultad"
+        location = (7, 4)
+        orientation = "V"
+
+        word_is_valid = board.validate_word_inside_board(word, location, orientation)
+        self.assertTrue(word_is_valid)
+
+    def test_place_word_empty_board_V_wrong(self):
+        board = Board()
+        word = "Facultad"
+        location = (14, 1)
+        orientation = "V"
+
+        with self.assertRaises(ValueError):
+            board.validate_word_inside_board(word, location, orientation)
+
+    def test_place_word_not_empty_board_H_fine(self):
+        board = Board()
+        board.grid[7][7].add_letter(Tile("C", 1))
+        board.grid[8][7].add_letter(Tile("A", 1))
+        board.grid[9][7].add_letter(Tile("S", 1))
+        board.grid[10][7].add_letter(Tile("A", 1))
+        word = "Facultad"
+        location = (4, 7)
+        orientation = "H"
+
+        word_is_valid = board.validate_word_inside_board(word, location, orientation)
+        self.assertTrue(word_is_valid)
 
 if __name__ == '__main__':
     unittest.main()

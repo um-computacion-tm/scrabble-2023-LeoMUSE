@@ -26,6 +26,15 @@ class ScrabbleGame:
         if self.current_player >= len(self.players):
             self.current_player = 0
 
+    #def validate_word(self, word, location, orientation):
+    #    pass
+
+    #def get_words():
+    #    pass
+
+    #def put_words():
+    #    pass
+
     def set_time_limit(self, time_limit):
         self.turn_limit = time_limit
     
