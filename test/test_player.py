@@ -23,9 +23,32 @@ class TestPlayer(unittest.TestCase):
 
         word_to_play = [Tile('A', 1), Tile('D', 2)]
         with self.assertRaises(ValueError):
-            result = player.play_word(word_to_play)
+            player.play_word(word_to_play)
         
         self.assertEqual(len(player.tiles), 3)
+
+    def test_assign_wildcard_value(self):
+        player = Player()
+        player.tiles = [Tile('', 0), Tile('A', 1), Tile('B', 1)]
+
+        letter = 'C'
+        value = 2
+
+        result = player.assign_wildcard_value(letter, value)
+        self.assertTrue(result)
+        self.assertEqual(len(player.tiles), 3)
+        self.assertEqual(player.tiles[2].letter, 'C')
+        self.assertEqual(player.tiles[2].value, 2)
+    
+    def test_wildcard_whit_no_wildcard(self):
+        player = Player()
+        player.tiles = [Tile('A', 1), Tile('B', 3)]
+
+        letter = 'C'
+        value = 2
+
+        player.assign_wildcard_value(letter, value)
+        self.assertEqual(len(player.tiles), 2)
 
 if __name__ == '__main__':
     unittest.main()
