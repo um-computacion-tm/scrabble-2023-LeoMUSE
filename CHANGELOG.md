@@ -64,3 +64,7 @@ All notable changes to this project will be documented in this file.
 - Added property is_empty to board.py
 - Deleted all main to try one better.
 - Deleted all main tests sice they are irrelevant.
+
+## [0.1.4] - 2023-09-19
+
+- Added Metod to define Wildcard letter and value.
