@@ -68,3 +68,9 @@ All notable changes to this project will be documented in this file.
 ## [0.1.4] - 2023-09-19
 
 - Added Metod to define Wildcard letter and value.
+
+## [0.1.5]- 2023-09-22
+
+- Added Dictionary class.
+- Added metod to check word if it is in dicionary.txt.
+- Added dictionary.txt
