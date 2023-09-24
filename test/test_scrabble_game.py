@@ -43,5 +43,13 @@ class TestScrabbleGame(unittest.TestCase):
         time.sleep(6)
         self.assertEqual(game.current_player, 1)
 
+    def test_pass_turn_scrabble(self):
+        game = ScrabbleGame(players_count = 2)
+        self.assertEqual(game.current_player, 0)
+        game.pass_turn_scrabble(game.current_player)
+        self.assertEqual(game.current_player, 1)
+        game.pass_turn_scrabble(game.current_player)
+        self.assertEqual(game.current_player, 0)
+
 if __name__ == '__main__':
     unittest.main()

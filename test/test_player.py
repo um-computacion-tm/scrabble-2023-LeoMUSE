@@ -50,5 +50,11 @@ class TestPlayer(unittest.TestCase):
         player.assign_wildcard_value(letter, value)
         self.assertEqual(len(player.tiles), 2)
 
+    def test_pass_turn(self):
+        player = Player()
+        self.assertFalse(player.passed_turn)
+        player.pass_turn_player()
+        self.assertTrue(player.passed_turn)
+
 if __name__ == '__main__':
     unittest.main()
