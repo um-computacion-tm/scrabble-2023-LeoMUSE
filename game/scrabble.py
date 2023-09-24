@@ -9,6 +9,7 @@ class ScrabbleGame:
     def __init__(self, players_count):
         self.board = Board()
         self.bag_tiles = BagTiles()
+        self.player = Player()
         self.players = []
         self.current_player = 0
         self.turn_limit = 60
@@ -22,6 +23,13 @@ class ScrabbleGame:
             player.tiles.extend(newTiles)
 
     def next_turn(self):
+        self.current_player += 1
+        if self.current_player >= len(self.players):
+            self.current_player = 0
+
+    def pass_turn_scrabble(self, player_index):
+        current_player = self.players[self.current_player]
+        current_player.pass_turn_player()
         self.current_player += 1
         if self.current_player >= len(self.players):
             self.current_player = 0

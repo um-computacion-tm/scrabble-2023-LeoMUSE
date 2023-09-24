@@ -3,10 +3,14 @@ from game.tile import Tile
 class Player:
     def __init__(self):
         self.tiles = []
+        self.passed_turn = False
 
     def __str__(self):
         tile_strings = [str(tile) for tile in self.tiles]
         return ", ".join(tile_strings)
+    
+    def pass_turn_player(self):
+        self.passed_turn = True
     
     def play_word(self, word):
         if not all(tile in self.tiles for tile in word):
