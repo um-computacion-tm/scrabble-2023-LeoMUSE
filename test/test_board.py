@@ -173,6 +173,17 @@ class TestCalculateWordValue(unittest.TestCase):
 
         word_is_valid = board.validate_word_inside_board(word, location, orientation)
         self.assertTrue(word_is_valid)
+    
+    def test_put_word_horizontal(self):
+        board = Board()
+        word = [Tile('H', 4), Tile('E', 1), Tile('L', 1), Tile('L', 1), Tile('O', 1)]
+        location = (7, 7)
+        orientation = 'H'
+
+        board.put_word_horizontal(word, location, orientation)
+
+        for i, letter in enumerate(word):
+            self.assertEqual(board.grid[7][7 + i].letter, letter)
 
 if __name__ == '__main__':
     unittest.main()

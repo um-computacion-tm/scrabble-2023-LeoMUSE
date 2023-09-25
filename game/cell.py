@@ -19,5 +19,11 @@ class Cell:
         else:
             return self.letter.value
         
+    def __str__(self):
+        if self.letter is not None:
+            return f"[{self.letter.letter}]"
+        else:
+            return "[ ]"
+        
 if __name__ == '__main__':
     pass
