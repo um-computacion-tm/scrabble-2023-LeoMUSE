@@ -180,7 +180,7 @@ class TestCalculateWordValue(unittest.TestCase):
         location = (7, 7)
         orientation = 'H'
 
-        board.put_word_horizontal(word, location, orientation)
+        board.put_word(word, location, orientation)
 
         for i, letter in enumerate(word):
             self.assertEqual(board.grid[7][7 + i].letter, letter)
@@ -191,7 +191,7 @@ class TestCalculateWordValue(unittest.TestCase):
         location = (7, 7)
         orientation = 'V'
 
-        board.put_word_vertical(word, location, orientation)
+        board.put_word(word, location, orientation)
 
         for i, letter in enumerate(word):
             self.assertEqual(board.grid[7 + i][7].letter, letter)
