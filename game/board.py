@@ -36,13 +36,16 @@ class Board:
             else:
                 return False
             
-    def put_word_horizontal(self, word, location, orientation):
-        x , y = location
+    def put_word(self, word, location, orientation):
+        x, y = location
 
-        if orientation == 'H':
-            for letter in word:
-                self.grid[x][y].add_letter(letter)
+        for letter in word:
+            self.grid[x][y].add_letter(letter)
+
+            if orientation == 'H':
                 y += 1
+            elif orientation == 'V':
+                x += 1
 
     @property
     def is_empty(self):
