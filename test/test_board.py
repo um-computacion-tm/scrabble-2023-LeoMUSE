@@ -185,5 +185,16 @@ class TestCalculateWordValue(unittest.TestCase):
         for i, letter in enumerate(word):
             self.assertEqual(board.grid[7][7 + i].letter, letter)
 
+    def test_put_word_vertical(self):
+        board = Board()
+        word = [Tile('V', 4), Tile('E', 1), Tile('R', 1), Tile('T', 1), Tile('I', 1), Tile('C', 3), Tile('A', 1), Tile('L', 1)]
+        location = (7, 7)
+        orientation = 'V'
+
+        board.put_word_vertical(word, location, orientation)
+
+        for i, letter in enumerate(word):
+            self.assertEqual(board.grid[7 + i][7].letter, letter)
+
 if __name__ == '__main__':
     unittest.main()

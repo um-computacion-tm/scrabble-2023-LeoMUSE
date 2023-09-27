@@ -43,6 +43,14 @@ class Board:
             for letter in word:
                 self.grid[x][y].add_letter(letter)
                 y += 1
+        
+    def put_word_vertical(self, word, location, orientation):
+        x , y = location
+
+        if orientation == 'V':
+            for letter in word:
+                self.grid[x][y].add_letter(letter)
+                x += 1
 
     @property
     def is_empty(self):

@@ -6,7 +6,7 @@ import time
 import threading
 
 class ScrabbleGame:
-    def __init__(self, players_count):
+    def __init__(self, players_count,):
         self.board = Board()
         self.bag_tiles = BagTiles()
         self.player = Player()
@@ -15,6 +15,9 @@ class ScrabbleGame:
         self.turn_limit = 60
         for _ in range(players_count):
             self.players.append(Player())
+
+    def get_current_player(self):
+            return self.players[self.current_player]
 
     def start_game(self):
         for player in self.players:
@@ -33,6 +36,15 @@ class ScrabbleGame:
         self.current_player += 1
         if self.current_player >= len(self.players):
             self.current_player = 0
+
+    def is_game_over(self):
+        if len(self.bag_tiles.tiles) == 0 and not self.can_exchange_tiles():
+            return True
+        
+    def can_exchange_tiles(self):
+        current_player = self.players[self.current_player]
+        exchangeable_tiles = [tile for tile in current_player.tiles if tile.letter != '' and tile.value != 0]
+        return len(exchangeable_tiles) > 0
 
     def set_time_limit(self, time_limit):
         self.turn_limit = time_limit

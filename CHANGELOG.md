@@ -77,8 +77,12 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.6] - 2023-09-23
 
-- Added pass_turn metod to players and scrabble
+- Added pass_turn metod to players and scrabble.
 
 ## [0.1.7] - 2023-09-24
 
-- Added put_word_horizontal metod
+- Added put_word_horizontal metod.
+
+## [0.1.8] - 2023-09-26
+
+- Added metod to get a game over.
