@@ -39,5 +39,5 @@ class TestDictionary(unittest.TestCase):
         file_path = dictionary.file_path
         self.assertEqual(board.check_word(word, file_path), False)
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     unittest.main()
