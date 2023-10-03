@@ -60,5 +60,19 @@ class ScrabbleGame:
         print(f"Tiempo agotado para {current_player} - Turno perdido.")
         self.next_turn()
         
+    def display_rack(self, player):
+        for i in player.tiles:
+            print(f'[{i.letter},{i.value}]', end=' ')
+
+    def display_board(self, board):
+        print("Tablero de Scrabble:")
+        for row in board.grid:
+            for cell in row:
+                if cell.letter is not None:
+                    print(f"[{cell.letter.letter}]", end=' ')
+                else:
+                    print("[ ]", end=' ')
+            print()
+
 if __name__ == '__main__':
     pass

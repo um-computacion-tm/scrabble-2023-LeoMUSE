@@ -58,22 +58,5 @@ class TestPlayer(unittest.TestCase):
         player.pass_turn_player()
         self.assertTrue(player.passed_turn)
 
-    def test_display_rack(self):
-        player = Player()
-        player.tiles = [Tile('A', 1), Tile('B', 3), Tile('C', 3)]
-        captured_output = StringIO()
-        sys.stdout = captured_output
-        player.mostrar_atril()
-        sys.stdout = sys.__stdout__
-        output_lines = captured_output.getvalue().strip().split('\n')
-        expected_output = [
-            "Atril del Jugador:",
-            "1: Tile('A',1)",
-            "2: Tile('B',3)",
-            "3: Tile('C',3)"
-        ]
-
-        self.assertEqual(output_lines, expected_output)
-
 if __name__ == '__main__':
     unittest.main()

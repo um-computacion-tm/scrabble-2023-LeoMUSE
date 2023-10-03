@@ -3,6 +3,10 @@ from game.scrabble import ScrabbleGame
 from game.player import Player
 from game.bagtile import BagTiles
 from game.tile import Tile
+from game.board import Board
+from game.cell import Cell
+import io
+import sys
 
 class TestScrabbleGame(unittest.TestCase):
     def test_init(self):
@@ -88,6 +92,93 @@ class TestScrabbleGame(unittest.TestCase):
         game.players = [player]
         game.current_player = 0
         self.assertFalse(game.can_exchange_tiles())
+
+    def test_display_tiles(self):
+        player = Player()
+        scrabble = ScrabbleGame(players_count=3) 
+        player.tiles = [
+            Tile('B', 2),
+            Tile('C', 3),
+            Tile('D', 3),
+            Tile('E', 1),
+            Tile('F', 4),
+            Tile('G', 2),
+            Tile('H', 4),
+        ]
+
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+        scrabble.display_rack(player)
+        sys.stdout = sys.__stdout__
+        output = captured_output.getvalue()
+        expected_output = """[B,2] [C,3] [D,3] [E,1] [F,4] [G,2] [H,4] """
+        self.assertEqual(output, expected_output)
+
+    def test_display_board_empty_board(self):
+        game = ScrabbleGame(players_count=2)
+        board = game.board
+
+        expected_output = [
+            "Tablero de Scrabble:",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]"
+        ]
+
+        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            game.display_board(board)
+            output = mock_stdout.getvalue()
+        
+        cleaned_output = [line.strip() for line in output.strip().split('\n')]
+        cleaned_expected_output = [line.strip() for line in expected_output]
+
+        self.assertEqual(cleaned_output, cleaned_expected_output)
+
+    def test_display_board_with_word_in_center(self):
+        game = ScrabbleGame(players_count=2)
+        board = game.board
+        word = [Tile('H', 4), Tile('E', 1), Tile('L', 1), Tile('L', 1), Tile('O', 1)]
+        board.put_word(word, location=(7, 7), orientation='H')
+
+        expected_output = [
+            "Tablero de Scrabble:",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [H] [E] [L] [L] [O] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]",
+            "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]"
+        ]
+
+        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            game.display_board(board)
+            output = mock_stdout.getvalue()
+        
+        cleaned_output = [line.strip() for line in output.strip().split('\n')]
+        cleaned_expected_output = [line.strip() for line in expected_output]
+
+        self.assertEqual(cleaned_output, cleaned_expected_output)
 
 if __name__ == '__main__':
     unittest.main()

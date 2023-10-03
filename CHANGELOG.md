@@ -90,3 +90,8 @@ All notable changes to this project will be documented in this file.
 ## [0.1.9] - 2023-10-1
 
 - Added display rack.
+
+## [0.2.0] - 2023-10-2
+
+- Moved display_rack to scrabble.py
+- Added display_board in scrabble.py

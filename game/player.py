@@ -27,11 +27,6 @@ class Player:
                 new_tile = Tile(letter, value)
                 self.tiles.append(new_tile)
             return True
-        
-    def mostrar_atril(self):
-        print("Atril del Jugador:")
-        for index, tile in enumerate(self.tiles, start = 1):
-            print(f"{index}: {tile}")
     
 if __name__ == '__main__':
     pass
