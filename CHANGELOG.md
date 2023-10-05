@@ -95,3 +95,9 @@ All notable changes to this project will be documented in this file.
 
 - Moved display_rack to scrabble.py
 - Added display_board in scrabble.py
+
+## [0.2.1] - 2023-10-5
+
+- Added Part of main (made in class).
+- Added Play metod to scrabble.py (made in class).
+- Added validate word to scrabble.py (commented) (made in class).

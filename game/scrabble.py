@@ -74,5 +74,20 @@ class ScrabbleGame:
                     print("[ ]", end=' ')
             print()
 
+    # def validate_word(self, word, location, orientation):
+    #     if not self.player.validate_tiles_player(word):
+    #         raise ValueError("El jugador no tiene las fichas necesarias.")
+    #     if not self.board.check_word(word):
+    #         raise ValueError("Su palabra no existe en el diccionario")
+    #     if not self.board.validate_word_inside_board(word, location, orientation):
+    #         raise ValueError("Su palabra excede el tablero")
+        
+    def play(self, word, location, orientation):
+        self.validate_word(word, location, orientation)
+        words = self.board.put_word(word, location, orientation)
+        total = self.board.calculate_word_value(words)
+        self.players[self.current_player].score += total
+        self.next_turn()
+
 if __name__ == '__main__':
     pass
