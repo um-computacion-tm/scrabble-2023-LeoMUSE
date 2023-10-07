@@ -14,7 +14,7 @@ class TestPlayer(unittest.TestCase):
         player.tiles = [Tile('A', 1), Tile('B', 3), Tile('C', 3)]
         
         word_to_play = [player.tiles[0], player.tiles[1]]
-        result = player.play_word(word_to_play)
+        result = player.validate_tiles_in_word(word_to_play)
 
         self.assertTrue(result)
         self.assertEqual(len(player.tiles), 1)
@@ -25,7 +25,7 @@ class TestPlayer(unittest.TestCase):
 
         word_to_play = [Tile('A', 1), Tile('D', 2)]
         with self.assertRaises(ValueError):
-            player.play_word(word_to_play)
+            player.validate_tiles_in_word(word_to_play)
         
         self.assertEqual(len(player.tiles), 3)
 

@@ -45,7 +45,7 @@ class ScrabbleGame:
         current_player = self.players[self.current_player]
         exchangeable_tiles = [tile for tile in current_player.tiles if tile.letter != '' and tile.value != 0]
         return len(exchangeable_tiles) > 0
-
+        
     def set_time_limit(self, time_limit):
         self.turn_limit = time_limit
     
@@ -75,7 +75,7 @@ class ScrabbleGame:
             print()
 
     # def validate_word(self, word, location, orientation):
-    #     if not self.player.validate_tiles_player(word):
+    #     if not self.player.validate_tiles_in_word(word):
     #         raise ValueError("El jugador no tiene las fichas necesarias.")
     #     if not self.board.check_word(word):
     #         raise ValueError("Su palabra no existe en el diccionario")

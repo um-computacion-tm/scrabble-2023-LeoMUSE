@@ -1,7 +1,7 @@
 from game.tile import Tile
 
 class Cell:
-    def __init__(self, multiplier:int , multiplier_type:bool, letter = None, active = True):
+    def __init__(self, multiplier:int , multiplier_type = None, letter = None, active = True):
         self.multiplier = multiplier
         self.multiplier_type = multiplier_type
         self.letter = letter
@@ -14,7 +14,7 @@ class Cell:
     def calculate_value(self):
         if self.letter is None:
             return 0
-        if self.multiplier_type and self.active:
+        if self.multiplier_type == "letter" and self.active:
             return self.letter.value * self.multiplier
         else:
             return self.letter.value

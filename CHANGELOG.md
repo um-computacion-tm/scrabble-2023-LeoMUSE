@@ -101,3 +101,9 @@ All notable changes to this project will be documented in this file.
 - Added Part of main (made in class).
 - Added Play metod to scrabble.py (made in class).
 - Added validate word to scrabble.py (commented) (made in class).
+
+## [0.2.2] - 2023-10-6
+
+- Added multipliers cordenates in board.
+- Modify calculate word value to use "word"
+- Modify calculate value (letter) to use "letter"

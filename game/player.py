@@ -11,8 +11,8 @@ class Player:
     
     def pass_turn_player(self):
         self.passed_turn = True
-    
-    def play_word(self, word):
+        
+    def validate_tiles_in_word(self, word):
         if not all(tile in self.tiles for tile in word):
             raise ValueError("El jugador no tiene las fichas necesarias.")
         if all(tile in self.tiles for tile in word):
