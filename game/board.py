@@ -10,6 +10,7 @@ class Board:
     def __init__(self):
         self.grid = [[Cell('', 1) for _ in range(15) ]for _ in range(15)]
         self.set_multiplier()
+        self.letter = None
 
     def set_multiplier_cord(self,cord, multiplier, multiplier_type):
         cell = self.grid[cord[0]][cord[1]]
@@ -69,22 +70,26 @@ class Board:
                 x += 1
 
     def display_board(self, board):
-            print("Tablero de Scrabble:")
-            for row in board.grid:
-                for cell in row:
-                    if cell.multiplier_type == "word":
-                        if cell.multiplier == 3:
-                            print("[W,3]", end=' ')
-                        elif cell.multiplier == 2:
-                            print("[W,2]", end=' ')
-                    elif cell.multiplier_type == "letter":
-                        if cell.multiplier == 3:
-                            print("[L,3]", end=' ')
-                        elif cell.multiplier == 2:
-                            print("[L,2]", end=' ')
-                    else:
-                        print("[   ]", end=' ')
-                print()
+        print("Tablero de Scrabble:")
+        print("  0      1      2      3      4      5      6      7      8      9      10     11     12     13     14  ")
+
+        for row in self.grid:
+            for cell in row:
+                if cell.letter is not None:
+                    print(f"[{cell.letter.letter}   ]", end=' ')
+                elif cell.multiplier_type == "word":
+                    if cell.multiplier == 3:
+                        print("[W,3 ]", end=' ')
+                    elif cell.multiplier == 2:
+                        print("[W,2 ]", end=' ')
+                elif cell.multiplier_type == "letter":
+                    if cell.multiplier == 3:
+                        print("[L,3 ]", end=' ')
+                    elif cell.multiplier == 2:
+                        print("[L,2 ]", end=' ')
+                else:
+                    print("[    ]", end=' ')
+            print()
 
     @property
     def is_empty(self):

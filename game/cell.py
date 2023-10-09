@@ -7,6 +7,7 @@ class Cell:
         self.letter = letter
         self.right_cell = None
         self.active = active
+        self.tile = letter
 
     def add_letter(self, letter:Tile):
         self.letter = letter

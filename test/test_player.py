@@ -1,5 +1,5 @@
 import unittest
-from game.player import Player
+from game.player import Player, InsufficientTilesInHand
 from game.tile import Tile
 from io import StringIO
 import sys
@@ -9,25 +9,22 @@ class TestPlayer(unittest.TestCase):
         player_1 = Player()
         self.assertEqual(len(player_1.tiles), 0)
     
-    def test_play_word_valid(self):
+    def test_has_letters_true(self):
         player = Player()
-        player.tiles = [Tile('A', 1), Tile('B', 3), Tile('C', 3)]
-        
-        word_to_play = [player.tiles[0], player.tiles[1]]
-        result = player.validate_tiles_in_word(word_to_play)
-
+        player.tiles = [Tile('H', 2), Tile('E', 1), Tile('L', 1), Tile('O', 1)]
+        word = [Tile('H', 2), Tile('E', 1), Tile('L', 1), Tile('O', 1)]
+        result = player.validate_tiles_in_word(word)
         self.assertTrue(result)
-        self.assertEqual(len(player.tiles), 1)
 
-    def test_play_word_invalid(self):
+    def test_validate_tiles_in_word_insufficient_tiles(self):
         player = Player()
-        player.tiles = [Tile('A', 1), Tile('D', 2), Tile('C', 3)]
+        player.tiles = [Tile('E', 1), Tile('L', 1), Tile('O', 1)]
+        tiles_to_validate = [Tile('H', 1), Tile('E', 1), Tile('L', 3), Tile('O', 1)]
+        with self.assertRaises(InsufficientTilesInHand) as context:
+            player.validate_tiles_in_word(tiles_to_validate)
 
-        word_to_play = [Tile('A', 1), Tile('D', 2)]
-        with self.assertRaises(ValueError):
-            player.validate_tiles_in_word(word_to_play)
-        
-        self.assertEqual(len(player.tiles), 3)
+        self.assertEqual(
+            str(context.exception),"No tienes los tiles necesarios")
 
     def test_assign_wildcard_value(self):
         player = Player()

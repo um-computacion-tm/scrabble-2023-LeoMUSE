@@ -113,3 +113,8 @@ All notable changes to this project will be documented in this file.
 - Moved display_board to board.py.
 - Modify display_board.
 - Added to diplay_board show the multipliers.
+
+## [0.2.4] - 2023-10-8
+
+- Added to display_board the form to replace a multiplier for a letter if the cell has a letter.
+- repared the metodo to validate_tiles_in_word to verify if the player has the tiles.

@@ -1,9 +1,13 @@
 from game.tile import Tile
 
+class InsufficientTilesInHand(Exception):
+    pass
+
 class Player:
     def __init__(self):
         self.tiles = []
         self.passed_turn = False
+        self.score = 0
 
     def __str__(self):
         tile_strings = [str(tile) for tile in self.tiles]
@@ -12,14 +16,22 @@ class Player:
     def pass_turn_player(self):
         self.passed_turn = True
         
-    def validate_tiles_in_word(self, word):
-        if not all(tile in self.tiles for tile in word):
-            raise ValueError("El jugador no tiene las fichas necesarias.")
-        if all(tile in self.tiles for tile in word):
-            for tile in word:
-                self.tiles.remove(tile)
-            return True
-
+    def validate_tiles_in_word(self, tiles=[]):
+        player_tiles = [tile.letter for tile in self.tiles]
+        word_tiles = [tile.letter for tile in tiles]
+        needed_tiles = {}
+        
+        for letter in word_tiles:
+            if letter in needed_tiles:
+                needed_tiles[letter] += 1
+            else:
+                needed_tiles[letter] = 1
+        for letter, count in needed_tiles.items():
+            if player_tiles.count(letter) < count:
+                raise InsufficientTilesInHand(f"No tienes los tiles necesarios")
+        
+        return True
+    
     def assign_wildcard_value(self,letter, value):
         for tile in self.tiles:
             if tile.value == 0:
