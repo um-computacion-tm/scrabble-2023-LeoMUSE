@@ -68,6 +68,24 @@ class Board:
             elif orientation == 'V':
                 x += 1
 
+    def display_board(self, board):
+            print("Tablero de Scrabble:")
+            for row in board.grid:
+                for cell in row:
+                    if cell.multiplier_type == "word":
+                        if cell.multiplier == 3:
+                            print("[W,3]", end=' ')
+                        elif cell.multiplier == 2:
+                            print("[W,2]", end=' ')
+                    elif cell.multiplier_type == "letter":
+                        if cell.multiplier == 3:
+                            print("[L,3]", end=' ')
+                        elif cell.multiplier == 2:
+                            print("[L,2]", end=' ')
+                    else:
+                        print("[   ]", end=' ')
+                print()
+
     @property
     def is_empty(self):
         return not any(cell.letter for row in self.grid for cell in row)

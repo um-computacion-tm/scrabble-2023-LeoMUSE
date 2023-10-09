@@ -107,3 +107,9 @@ All notable changes to this project will be documented in this file.
 - Added multipliers cordenates in board.
 - Modify calculate word value to use "word"
 - Modify calculate value (letter) to use "letter"
+
+## [0.2.3] - 2023-10-8
+
+- Moved display_board to board.py.
+- Modify display_board.
+- Added to diplay_board show the multipliers.

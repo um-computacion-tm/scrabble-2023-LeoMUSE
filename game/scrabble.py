@@ -64,16 +64,6 @@ class ScrabbleGame:
         for i in player.tiles:
             print(f'[{i.letter},{i.value}]', end=' ')
 
-    def display_board(self, board):
-        print("Tablero de Scrabble:")
-        for row in board.grid:
-            for cell in row:
-                if cell.letter is not None:
-                    print(f"[{cell.letter.letter}]", end=' ')
-                else:
-                    print("[ ]", end=' ')
-            print()
-
     # def validate_word(self, word, location, orientation):
     #     if not self.player.validate_tiles_in_word(word):
     #         raise ValueError("El jugador no tiene las fichas necesarias.")

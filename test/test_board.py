@@ -2,6 +2,8 @@ import unittest
 from game.board import Board
 from game.cell import Cell
 from game.tile import Tile
+from game.board import TL,TW,DW,DL
+import io
 
 class TestBoard(unittest.TestCase):
     def test_init(self):
@@ -195,6 +197,52 @@ class TestCalculateWordValue(unittest.TestCase):
 
         for i, letter in enumerate(word):
             self.assertEqual(board.grid[7 + i][7].letter, letter)
+
+    def test_display_board_with_all_multipliers(self):
+        board = Board()
+
+        for row in range(15):
+            for col in range(15):
+                if (row, col) in TW:
+                    board.grid[row][col].multiplier_type = "word"
+                    board.grid[row][col].multiplier = 3
+                elif (row, col) in DW:
+                    board.grid[row][col].multiplier_type = "word"
+                    board.grid[row][col].multiplier = 2
+                elif (row, col) in TL:
+                    board.grid[row][col].multiplier_type = "letter"
+                    board.grid[row][col].multiplier = 3
+                elif (row, col) in DL:
+                    board.grid[row][col].multiplier_type = "letter"
+                    board.grid[row][col].multiplier = 2
+
+        expected_output = [
+            "Tablero de Scrabble:",
+            "[W,3] [   ] [   ] [L,2] [   ] [   ] [   ] [W,3] [   ] [   ] [   ] [L,2] [   ] [   ] [W,3]",
+            "[   ] [W,2] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [W,2] [   ]",
+            "[   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ]",
+            "[L,2] [   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ] [L,2]",
+            "[   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ]",
+            "[   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ]",
+            "[   ] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [   ]",
+            "[W,3] [   ] [   ] [L,2] [   ] [   ] [   ] [   ] [   ] [   ] [   ] [L,2] [   ] [   ] [W,3]",
+            "[   ] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [   ]",
+            "[   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ]",
+            "[   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ]",
+            "[L,2] [   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ] [L,2]",
+            "[   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ]",
+            "[   ] [W,2] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [W,2] [   ]",
+            "[W,3] [   ] [   ] [L,2] [   ] [   ] [   ] [W,3] [   ] [   ] [   ] [L,2] [   ] [   ] [W,3]",
+        ]
+
+        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            board.display_board(board)
+            output = mock_stdout.getvalue()
+
+        cleaned_output = [line.strip() for line in output.strip().split('\n')]
+        cleaned_expected_output = [line.strip() for line in expected_output]
+        self.maxDiff = None
+        self.assertEqual(cleaned_output, cleaned_expected_output)
 
 if __name__ == '__main__':
     unittest.main()
