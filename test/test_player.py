@@ -20,11 +20,21 @@ class TestPlayer(unittest.TestCase):
         player = Player()
         player.tiles = [Tile('E', 1), Tile('L', 1), Tile('O', 1)]
         tiles_to_validate = [Tile('H', 1), Tile('E', 1), Tile('L', 3), Tile('O', 1)]
+        
         with self.assertRaises(InsufficientTilesInHand) as context:
             player.validate_tiles_in_word(tiles_to_validate)
 
-        self.assertEqual(
-            str(context.exception),"No tienes los tiles necesarios")
+        self.assertEqual(str(context.exception),"No tienes los tiles necesarios")
+    
+    def test_validate_tiles_in_word_increase_count(self):
+        player = Player()
+        player.tiles = [Tile('H', 2), Tile('E', 1), Tile('L', 3), Tile('O', 1)]
+        tiles_to_validate = [Tile('H', 1), Tile('E', 1), Tile('L', 1), Tile('L', 1), Tile('O', 1)]
+
+        with self.assertRaises(InsufficientTilesInHand) as context:
+            player.validate_tiles_in_word(tiles_to_validate)
+
+        self.assertEqual(str(context.exception), "No tienes los tiles necesarios")
 
     def test_assign_wildcard_value(self):
         player = Player()

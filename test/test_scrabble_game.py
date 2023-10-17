@@ -114,5 +114,6 @@ class TestScrabbleGame(unittest.TestCase):
         expected_output = """[B,2] [C,3] [D,3] [E,1] [F,4] [G,2] [H,4] """
         self.assertEqual(output, expected_output)
 
+
 if __name__ == '__main__':
     unittest.main()

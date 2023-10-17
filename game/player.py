@@ -17,8 +17,8 @@ class Player:
         self.passed_turn = True
         
     def validate_tiles_in_word(self, tiles=[]):
-        player_tiles = [tile.letter for tile in self.tiles]
-        word_tiles = [tile.letter for tile in tiles]
+        player_tiles = [tile.letter.upper() for tile in self.tiles]
+        word_tiles = [tile.letter.upper() for tile in tiles]
         needed_tiles = {}
         
         for letter in word_tiles:
@@ -26,6 +26,7 @@ class Player:
                 needed_tiles[letter] += 1
             else:
                 needed_tiles[letter] = 1
+        
         for letter, count in needed_tiles.items():
             if player_tiles.count(letter) < count:
                 raise InsufficientTilesInHand(f"No tienes los tiles necesarios")

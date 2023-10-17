@@ -179,7 +179,7 @@ class TestCalculateWordValue(unittest.TestCase):
     
     def test_put_word_horizontal(self):
         board = Board()
-        word = [Tile('H', 4), Tile('E', 1), Tile('L', 1), Tile('L', 1), Tile('O', 1)]
+        word = 'HELLO'
         location = (7, 7)
         orientation = 'H'
 
@@ -190,7 +190,7 @@ class TestCalculateWordValue(unittest.TestCase):
 
     def test_put_word_vertical(self):
         board = Board()
-        word = [Tile('V', 4), Tile('E', 1), Tile('R', 1), Tile('T', 1), Tile('I', 1), Tile('C', 3), Tile('A', 1), Tile('L', 1)]
+        word = 'VERTICAL'
         location = (7, 7)
         orientation = 'V'
 
@@ -202,39 +202,24 @@ class TestCalculateWordValue(unittest.TestCase):
     def test_display_board_with_all_multipliers(self):
         board = Board()
 
-        for row in range(15):
-            for col in range(15):
-                if (row, col) in TW:
-                    board.grid[row][col].multiplier_type = "word"
-                    board.grid[row][col].multiplier = 3
-                elif (row, col) in DW:
-                    board.grid[row][col].multiplier_type = "word"
-                    board.grid[row][col].multiplier = 2
-                elif (row, col) in TL:
-                    board.grid[row][col].multiplier_type = "letter"
-                    board.grid[row][col].multiplier = 3
-                elif (row, col) in DL:
-                    board.grid[row][col].multiplier_type = "letter"
-                    board.grid[row][col].multiplier = 2
-
         expected_output = [
             "Tablero de Scrabble:",
-            "  0      1      2      3      4      5      6      7      8      9      10     11     12     13     14  ",
-            "[W,3 ] [    ] [    ] [L,2 ] [    ] [    ] [    ] [W,3 ] [    ] [    ] [    ] [L,2 ] [    ] [    ] [W,3 ]",
-            "[    ] [W,2 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [W,2 ] [    ]",
-            "[    ] [    ] [W,2 ] [    ] [    ] [    ] [L,2 ] [    ] [L,2 ] [    ] [    ] [    ] [W,2 ] [    ] [    ]",
-            "[L,2 ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [L,2 ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [L,2 ]",
-            "[    ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [    ]",
-            "[    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ]",
-            "[    ] [    ] [L,2 ] [    ] [    ] [    ] [L,2 ] [    ] [L,2 ] [    ] [    ] [    ] [L,2 ] [    ] [    ]",
-            "[W,3 ] [    ] [    ] [L,2 ] [    ] [    ] [    ] [    ] [    ] [    ] [    ] [L,2 ] [    ] [    ] [W,3 ]",
-            "[    ] [    ] [L,2 ] [    ] [    ] [    ] [L,2 ] [    ] [L,2 ] [    ] [    ] [    ] [L,2 ] [    ] [    ]",
-            "[    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ]",
-            "[    ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [    ]",
-            "[L,2 ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [L,2 ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [L,2 ]",
-            "[    ] [    ] [W,2 ] [    ] [    ] [    ] [L,2 ] [    ] [L,2 ] [    ] [    ] [    ] [W,2 ] [    ] [    ]",
-            "[    ] [W,2 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [W,2 ] [    ]",
-            "[W,3 ] [    ] [    ] [L,2 ] [    ] [    ] [    ] [W,3 ] [    ] [    ] [    ] [L,2 ] [    ] [    ] [W,3 ]",
+            "  0     1     2     3     4     5     6     7     8     9    10    11    12    13    14  ",
+            "[W,3] [   ] [   ] [L,2] [   ] [   ] [   ] [W,3] [   ] [   ] [   ] [L,2] [   ] [   ] [W,3]",
+            "[   ] [W,2] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [W,2] [   ]",
+            "[   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ]",
+            "[L,2] [   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ] [L,2]",
+            "[   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ]",
+            "[   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ]",
+            "[   ] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [   ]",
+            "[W,3] [   ] [   ] [L,2] [   ] [   ] [   ] [   ] [   ] [   ] [   ] [L,2] [   ] [   ] [W,3]",
+            "[   ] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [   ]",
+            "[   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ]",
+            "[   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ]",
+            "[L,2] [   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ] [L,2]",
+            "[   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ]",
+            "[   ] [W,2] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [W,2] [   ]",
+            "[W,3] [   ] [   ] [L,2] [   ] [   ] [   ] [W,3] [   ] [   ] [   ] [L,2] [   ] [   ] [W,3]",
         ]
 
         with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
@@ -249,45 +234,30 @@ class TestCalculateWordValue(unittest.TestCase):
     def test_display_board_with_all_multipliers_and_word(self):
         board = Board()
         player = Player()
-        player.tiles = [Tile('H', 2), Tile('E', 1), Tile('LL', 8), Tile('O', 1), Tile('O', 1)]
-        word = [Tile('H', 2), Tile('E', 1), Tile('LL', 8), Tile('O', 1), Tile('O', 1)]
+        player.tiles = [Tile('H', 2), Tile('E', 1), Tile('L', 4), Tile('O', 1), Tile('O', 1)]
+        word = [Tile('H', 2), Tile('E', 1), Tile('L', 4), Tile('L', 4), Tile('O', 1)]
         location = ( 7, 7 )
         orientation = "H"
         board.put_word(word, location, orientation)
 
-        for row in range(15):
-            for col in range(15):
-                if (row, col) in TW:
-                    board.grid[row][col].multiplier_type = "word"
-                    board.grid[row][col].multiplier = 3
-                elif (row, col) in DW:
-                    board.grid[row][col].multiplier_type = "word"
-                    board.grid[row][col].multiplier = 2
-                elif (row, col) in TL:
-                    board.grid[row][col].multiplier_type = "letter"
-                    board.grid[row][col].multiplier = 3
-                elif (row, col) in DL:
-                    board.grid[row][col].multiplier_type = "letter"
-                    board.grid[row][col].multiplier = 2
-
         expected_output = [
             "Tablero de Scrabble:",
-            "  0      1      2      3      4      5      6      7      8      9      10     11     12     13     14  ",
-            "[W,3 ] [    ] [    ] [L,2 ] [    ] [    ] [    ] [W,3 ] [    ] [    ] [    ] [L,2 ] [    ] [    ] [W,3 ]",
-            "[    ] [W,2 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [W,2 ] [    ]",
-            "[    ] [    ] [W,2 ] [    ] [    ] [    ] [L,2 ] [    ] [L,2 ] [    ] [    ] [    ] [W,2 ] [    ] [    ]",
-            "[L,2 ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [L,2 ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [L,2 ]",
-            "[    ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [    ]",
-            "[    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ]",
-            "[    ] [    ] [L,2 ] [    ] [    ] [    ] [L,2 ] [    ] [L,2 ] [    ] [    ] [    ] [L,2 ] [    ] [    ]",
-            "[W,3 ] [    ] [    ] [L,2 ] [    ] [    ] [    ] [H   ] [E   ] [LL   ] [O   ] [O   ] [    ] [    ] [W,3 ]",
-            "[    ] [    ] [L,2 ] [    ] [    ] [    ] [L,2 ] [    ] [L,2 ] [    ] [    ] [    ] [L,2 ] [    ] [    ]",
-            "[    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ]",
-            "[    ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [    ]",
-            "[L,2 ] [    ] [    ] [W,2 ] [    ] [    ] [    ] [L,2 ] [    ] [    ] [    ] [W,2 ] [    ] [    ] [L,2 ]",
-            "[    ] [    ] [W,2 ] [    ] [    ] [    ] [L,2 ] [    ] [L,2 ] [    ] [    ] [    ] [W,2 ] [    ] [    ]",
-            "[    ] [W,2 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [L,3 ] [    ] [    ] [    ] [W,2 ] [    ]",
-            "[W,3 ] [    ] [    ] [L,2 ] [    ] [    ] [    ] [W,3 ] [    ] [    ] [    ] [L,2 ] [    ] [    ] [W,3 ]",
+            "  0     1     2     3     4     5     6     7     8     9    10    11    12    13    14  ",
+            "[W,3] [   ] [   ] [L,2] [   ] [   ] [   ] [W,3] [   ] [   ] [   ] [L,2] [   ] [   ] [W,3]",
+            "[   ] [W,2] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [W,2] [   ]",
+            "[   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ]",
+            "[L,2] [   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ] [L,2]",
+            "[   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ]",
+            "[   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ]",
+            "[   ] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [   ]",
+            "[W,3] [   ] [   ] [L,2] [   ] [   ] [   ] [ H ] [ E ] [ L ] [ L ] [ O ] [   ] [   ] [W,3]",
+            "[   ] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [L,2] [   ] [   ]",
+            "[   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ]",
+            "[   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ] [   ] [W,2] [   ] [   ] [   ] [   ]",
+            "[L,2] [   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ] [L,2]",
+            "[   ] [   ] [W,2] [   ] [   ] [   ] [L,2] [   ] [L,2] [   ] [   ] [   ] [W,2] [   ] [   ]",
+            "[   ] [W,2] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [L,3] [   ] [   ] [   ] [W,2] [   ]",
+            "[W,3] [   ] [   ] [L,2] [   ] [   ] [   ] [W,3] [   ] [   ] [   ] [L,2] [   ] [   ] [W,3]",
         ]
 
         with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
@@ -298,7 +268,6 @@ class TestCalculateWordValue(unittest.TestCase):
         cleaned_expected_output = [line.strip() for line in expected_output]
         self.maxDiff = None
         self.assertEqual(cleaned_output, cleaned_expected_output)
-
 
 if __name__ == '__main__':
     unittest.main()

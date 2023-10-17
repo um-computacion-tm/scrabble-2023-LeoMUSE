@@ -1,4 +1,5 @@
 from game.scrabble import ScrabbleGame
+from game.board import Board
 
 def get_player_count():
     while True:
@@ -14,7 +15,7 @@ def get_player_count():
     return player_count
 
 def show_board(self):
-    return ScrabbleGame.display_board()
+    return Board.display_board()
 
 def show_player(self):
     return ScrabbleGame.get_current_player()
@@ -31,9 +32,11 @@ def get_inputs():
 def main():
     player_count = get_player_count()
     game = ScrabbleGame(player_count)
+    board = Board()
+    board.display_board
     game.start_game()
     while not game.is_game_over():
-        game.display_board(game.board)
+        board.display_board(game.board)
         game.display_rack(game.get_current_player())
         word, coords, orientation = get_inputs()
         try:

@@ -1,5 +1,6 @@
 from game.cell import Cell
 from game.dictionary import Dictionary
+from game.tile import Tile
 
 TW = ((0,0), (7, 0), (14,0), (0, 7), (14, 7), (0, 14), (7, 14), (14,14))
 DW = ((1,1), (2,2), (3,3), (4,4), (1, 13), (2, 12), (3, 11), (4, 10), (13, 1), (12, 2), (11, 3), (10, 4), (13,13), (12, 12), (11,11), (10,10))
@@ -71,24 +72,39 @@ class Board:
 
     def display_board(self, board):
         print("Tablero de Scrabble:")
-        print("  0      1      2      3      4      5      6      7      8      9      10     11     12     13     14  ")
+        print("  0     1     2     3     4     5     6     7     8     9    10    11    12    13    14  ")
+
+        for row in range(15):
+            for col in range(15):
+                if (row, col) in TW:
+                    self.grid[row][col].multiplier_type = "word"
+                    self.grid[row][col].multiplier = 3
+                elif (row, col) in DW:
+                    self.grid[row][col].multiplier_type = "word"
+                    self.grid[row][col].multiplier = 2
+                elif (row, col) in TL:
+                    self.grid[row][col].multiplier_type = "letter"
+                    self.grid[row][col].multiplier = 3
+                elif (row, col) in DL:
+                    self.grid[row][col].multiplier_type = "letter"
+                    self.grid[row][col].multiplier = 2
 
         for row in self.grid:
             for cell in row:
                 if cell.letter is not None:
-                    print(f"[{cell.letter.letter}   ]", end=' ')
+                    print(f"[ {cell.letter.letter} ]", end=' ')
                 elif cell.multiplier_type == "word":
                     if cell.multiplier == 3:
-                        print("[W,3 ]", end=' ')
+                        print("[W,3]", end=' ')
                     elif cell.multiplier == 2:
-                        print("[W,2 ]", end=' ')
+                        print("[W,2]", end=' ')
                 elif cell.multiplier_type == "letter":
                     if cell.multiplier == 3:
-                        print("[L,3 ]", end=' ')
+                        print("[L,3]", end=' ')
                     elif cell.multiplier == 2:
-                        print("[L,2 ]", end=' ')
+                        print("[L,2]", end=' ')
                 else:
-                    print("[    ]", end=' ')
+                    print("[   ]", end=' ')
             print()
 
     @property
