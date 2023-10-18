@@ -119,6 +119,10 @@ All notable changes to this project will be documented in this file.
 - Added to display_board the form to replace a multiplier for a letter if the cell has a letter.
 - repared the metodo to validate_tiles_in_word to verify if the player has the tiles.
 
-## [0.2.5] - 2023-10-17
+## [0.2.5] - 2023-10-16
 
 - Modified some varied lines of code.
+
+## [0.2.6] - 2023-10-17
+
+- Added metod to play word the first time.

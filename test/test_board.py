@@ -269,5 +269,29 @@ class TestCalculateWordValue(unittest.TestCase):
         self.maxDiff = None
         self.assertEqual(cleaned_output, cleaned_expected_output)
 
+    def test_put_word_first_time_horizontal(self):
+        board = Board()
+        word = "HELLO"
+        location = (7, 7)
+        orientation = "H"
+        result = board.put_word_first_time(word, location, orientation)
+        self.assertTrue(result)
+
+    def test_put_word_first_time_vertical(self):
+        board = Board()
+        word = "WORLD"
+        location = (7, 7)
+        orientation = "V"
+        result = board.put_word_first_time(word, location, orientation)
+        self.assertTrue(result)
+
+    def test_put_word_first_time_invalid(self):
+        board = Board()
+        word = "INVALID"
+        location = (3, 3)  # Not the center
+        orientation = "H"
+        with self.assertRaises(ValueError):
+            board.put_word_first_time(word, location, orientation)
+
 if __name__ == '__main__':
     unittest.main()

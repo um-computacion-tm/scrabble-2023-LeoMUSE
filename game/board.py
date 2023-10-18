@@ -59,6 +59,20 @@ class Board:
             else:
                 return False
             
+    def put_word_first_time(self, word, location, orientation):
+        center = (7, 7)
+
+        if orientation == "H":
+            first_word = [(location[0], location[1] + i) for i in range(len(word))]
+        elif orientation == "V":
+            first_word = [(location[0] + i, location[1]) for i in range(len(word))]
+
+        if center not in first_word:
+            raise ValueError("The first word must be in the center")
+        
+        self.put_word(word, location, orientation)   
+        return center in first_word
+            
     def put_word(self, word, location, orientation):
         x, y = location
 
@@ -76,36 +90,38 @@ class Board:
 
         for row in range(15):
             for col in range(15):
-                if (row, col) in TW:
-                    self.grid[row][col].multiplier_type = "word"
-                    self.grid[row][col].multiplier = 3
-                elif (row, col) in DW:
-                    self.grid[row][col].multiplier_type = "word"
-                    self.grid[row][col].multiplier = 2
-                elif (row, col) in TL:
-                    self.grid[row][col].multiplier_type = "letter"
-                    self.grid[row][col].multiplier = 3
-                elif (row, col) in DL:
-                    self.grid[row][col].multiplier_type = "letter"
-                    self.grid[row][col].multiplier = 2
-
-        for row in self.grid:
-            for cell in row:
-                if cell.letter is not None:
-                    print(f"[ {cell.letter.letter} ]", end=' ')
-                elif cell.multiplier_type == "word":
-                    if cell.multiplier == 3:
-                        print("[W,3]", end=' ')
-                    elif cell.multiplier == 2:
-                        print("[W,2]", end=' ')
-                elif cell.multiplier_type == "letter":
-                    if cell.multiplier == 3:
-                        print("[L,3]", end=' ')
-                    elif cell.multiplier == 2:
-                        print("[L,2]", end=' ')
-                else:
-                    print("[   ]", end=' ')
+                self.print_cell_contents(row, col)
             print()
+
+    def print_cell_contents(self, row, col):
+        cell = self.grid[row][col]
+        if (row, col) in TW:
+            cell.multiplier_type = "word"
+            cell.multiplier = 3
+        elif (row, col) in DW:
+            cell.multiplier_type = "word"
+            cell.multiplier = 2
+        elif (row, col) in TL:
+            cell.multiplier_type = "letter"
+            cell.multiplier = 3
+        elif (row, col) in DL:
+            cell.multiplier_type = "letter"
+            cell.multiplier = 2
+
+        if cell.letter is not None:
+            print(f"[ {cell.letter.letter} ]", end=' ')
+        elif cell.multiplier_type == "word":
+            if cell.multiplier == 3:
+                print("[W,3]", end=' ')
+            elif cell.multiplier == 2:
+                print("[W,2]", end=' ')
+        elif cell.multiplier_type == "letter":
+            if cell.multiplier == 3:
+                print("[L,3]", end=' ')
+            elif cell.multiplier == 2:
+                print("[L,2]", end=' ')
+        else:
+            print("[   ]", end=' ')
 
     @property
     def is_empty(self):

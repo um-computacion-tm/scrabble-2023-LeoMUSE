@@ -23,26 +23,27 @@ def show_player(self):
 def get_inputs():
     word = input('Palabra: ')
     coords_str = input('Coordenadas (fila, columna): ')
-    coords_str = coords_str.replace('(', '').replace(')', '')  # Eliminar paréntesis
-    coords_str = coords_str.strip()  # Eliminar espacios en blanco adicionales
+    coords_str = coords_str.replace('(', '').replace(')', '')
+    coords_str = coords_str.strip()
     coords = tuple(map(int, coords_str.split(',')))
     orientation = input('Orientación (H/V): ')
     return word, coords, orientation
 
-def main():
-    player_count = get_player_count()
-    game = ScrabbleGame(player_count)
-    board = Board()
-    board.display_board
-    game.start_game()
-    while not game.is_game_over():
-        board.display_board(game.board)
-        game.display_rack(game.get_current_player())
-        word, coords, orientation = get_inputs()
-        try:
-            game.play(word, coords, orientation)
-        except Exception as e:
-            print(e)
+# def main():
+#     player_count = get_player_count()
+#     game = ScrabbleGame(player_count)
+#     board = Board()
+#     board.display_board
+#     game.start_game()
+#     while not game.is_game_over():
+#         board.display_board(game.board)
+#         game.display_rack(game.get_current_player())
+#         word, coords, orientation = get_inputs()
+#         try:
+#             game.play(word, coords, orientation)
+#         except Exception as e:
+#             print(e)
 
 if __name__ == '__main__':
-    main()
+    # main()
+    pass
