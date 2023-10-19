@@ -40,12 +40,12 @@ class Board:
         return value
     
     def validate_word_inside_board(self, word, location, orientation):
-        x , y = location
-        if orientation == 'H' and y + len(word) > 15:
-            raise ValueError("La palabra no cabe en el tablero en la posicion especificada.")
-        elif orientation == 'V' and x + len(word) > 15:
-            raise ValueError("La palabra no cabe en el tablero en la posicion especificada.")
-        return orientation in ('H', 'V')
+        tiles = len(word)
+        y, x = location
+        if (orientation == 'H' and x + tiles > 15) or \
+                (orientation == 'V' and y + tiles > 15):
+            raise ValueError("Word out of board")
+        return True
     
     def check_word(self,word, file_path):
         wordletter = ""
@@ -74,15 +74,36 @@ class Board:
         return center in first_word
             
     def put_word(self, word, location, orientation):
-        x, y = location
+        self.validate_word_inside_board(word, location, orientation)
+        tiles = len(word)
+        y, x = location
+        fila, columna = (0, 1) if orientation == 'H' else (1, 0)
 
-        for letter in word:
-            self.grid[x][y].add_letter(letter)
+        for i in range(tiles):
+            if self.grid[y][x].letter is None:
+                self.grid[y][x].letter = word[i]
+            y += fila
+            x += columna
 
-            if orientation == 'H':
-                y += 1
-            elif orientation == 'V':
-                x += 1
+    def validate_word_connected(self, word, location, orientation):
+        y, x = location
+        count = 0
+        cells = [(y - 1, x), (y + 1, x), (y, x - 1), (y, x + 1)]
+
+        for direction in cells:
+            dr, dc = direction 
+            if 0 <= dr < 15 and 0 <= dc < 15 and self.grid[dr][dc].tile is not None:
+                count += 1
+            for _ in range(len(word)):
+                if orientation == 'H':
+                    x += 1
+                elif orientation == 'V':
+                    y += 1
+
+        if count != 0:
+            return True
+        else:
+            raise ValueError('Words must be connected')
 
     def display_board(self, board):
         print("Tablero de Scrabble:")

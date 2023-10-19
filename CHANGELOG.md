@@ -126,3 +126,8 @@ All notable changes to this project will be documented in this file.
 ## [0.2.6] - 2023-10-17
 
 - Added metod to play word the first time.
+
+## [0.2.7] - 2023-10-19
+
+- Modified put_word metod
+- Added validate word conected metod.

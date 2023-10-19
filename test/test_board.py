@@ -199,6 +199,41 @@ class TestCalculateWordValue(unittest.TestCase):
         for i, letter in enumerate(word):
             self.assertEqual(board.grid[7 + i][7].letter, letter)
 
+    def test_word_connected_horizontal(self):
+        board = Board()
+        word = "CASA"
+        location = (7, 7) 
+        orientation = "H"  
+
+        board.grid[7][8].tile = "A"
+        board.grid[7][9].tile = "S"
+        board.grid[7][10].tile = "A"
+
+        result = board.validate_word_connected(word, location, orientation)
+        self.assertTrue(result)
+
+    def test_word_connected_vertical(self):
+        board = Board()
+        word = "CASA"
+        location = (7, 7)
+        orientation = "V"
+
+        board.grid[6][7].tile = "A"
+        board.grid[5][7].tile = "S"
+        board.grid[4][7].tile = "A"
+
+        result = board.validate_word_connected(word, location, orientation)
+        self.assertTrue(result)
+
+    def test_word_not_connected(self):
+        board = Board()
+        word = "CASA"
+        location = (7, 7)
+        orientation = "H"
+
+        with self.assertRaises(ValueError):
+            board.validate_word_connected(word, location, orientation)
+
     def test_display_board_with_all_multipliers(self):
         board = Board()
 
