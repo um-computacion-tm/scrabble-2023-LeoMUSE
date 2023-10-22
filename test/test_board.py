@@ -323,10 +323,87 @@ class TestCalculateWordValue(unittest.TestCase):
     def test_put_word_first_time_invalid(self):
         board = Board()
         word = "INVALID"
-        location = (3, 3)  # Not the center
+        location = (3, 3)
         orientation = "H"
         with self.assertRaises(ValueError):
             board.put_word_first_time(word, location, orientation)
+
+    def test_validate_word_place_board_vertical(self):
+        board=Board()
+        'Palabra 1'
+        board.grid[7][7].tile = Tile('C',1)
+        board.grid[7][8].tile = Tile('A',1)
+        board.grid[7][9].tile = Tile('M',3)
+        board.grid[7][10].tile = Tile('A',1)
+        word = 'SACA'
+        orientation = 'V'
+        location = (5,7)
+        self.assertTrue(board.validate_word_place_board(word, location, orientation))
+
+    def test_validate_word_place_board_vertical_not_place(self):
+        board=Board()
+        'Palabra 1'
+        board.grid[7][7].tile = Tile('C',1)
+        board.grid[7][8].tile = Tile('A',1)
+        board.grid[7][9].tile = Tile('M',3)
+        board.grid[7][10].tile = Tile('A',1)
+        word = 'ACTIVAMENTE'
+        orientation = 'V'
+        location = (6,7)
+        self.assertFalse(board.validate_word_place_board(word, location, orientation))
+
+    def test_validate_word_place_board_horizontal(self):
+        board=Board()
+        board.grid[7][7].tile = Tile('C',1)
+        board.grid[7][8].tile = Tile('A',1)
+        board.grid[7][9].tile = Tile('S',2)
+        board.grid[7][10].tile = Tile('A',1)
+        word = 'SACA'
+        orientation = 'H'
+        location = (6,7)
+        self.assertFalse(board.validate_word_place_board(word, location, orientation))
+
+    def test_validate_word_place_board_valid(self):
+        board=Board()
+        board.grid[7][7].add_letter = Tile('C',1)
+        word = 'SACA'
+        location = (7,6)
+        orientation = 'H'
+        self.assertFalse(board.validate_word_place_board(word, location, orientation))
+
+    def test_validate_word_place_board_cross(self):
+        board=Board()
+        board.grid[7][7].tile = Tile('C',1)
+        board.grid[8][7].tile = Tile('A',1)
+        board.grid[9][7].tile = Tile('M',3)
+        board.grid[10][7].tile = Tile('A',1)
+        word = 'SACA'
+        orientation = 'H'
+        location = (8,6)
+        self.assertTrue(board.validate_word_place_board(word, location, orientation))
+
+    def test_place_word_not_empty_board_horizontal_fine(self):
+        board = Board()
+        board.grid[7][7].add_letter(Tile('C', 1))
+        board.grid[8][7].add_letter(Tile('A', 1)) 
+        board.grid[9][7].add_letter(Tile('S', 1)) 
+        board.grid[10][7].add_letter(Tile('A', 1)) 
+        word = "FACULTAD"
+        location = (8, 6)
+        orientation = "H"
+        word_is_valid = board.validate_word_place_board(word, location, orientation)
+        self.assertEqual (word_is_valid , False)
+
+    def test_validate_word_place_board_vertical_not_place_1(self):
+        board=Board()
+        board.grid[7][7].add_letter(Tile('C', 1))
+        board.grid[8][7].add_letter(Tile('A', 1)) 
+        board.grid[9][7].add_letter(Tile('S', 1)) 
+        board.grid[10][7].add_letter(Tile('A', 1)) 
+        word = 'ACTIVAMENTE'
+        orientation = 'H'
+        location = (6,7)
+        self.assertFalse(board.validate_word_place_board(word, location, orientation))
 
 if __name__ == '__main__':
     unittest.main()

@@ -131,3 +131,6 @@ All notable changes to this project will be documented in this file.
 
 - Modified put_word metod
 - Added validate word conected metod.
+
+## [0.2.8] - 2023-10-21 
+- Added metodod to to verify that the word dont overlap letterts that already are in the board

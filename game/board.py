@@ -104,6 +104,28 @@ class Board:
             return True
         else:
             raise ValueError('Words must be connected')
+        
+    def validate_word_place_board(self, word, location,orientation):
+        rows, cols = len(self.grid), len(self.grid[0])
+        length = len(word)
+        if (orientation == 'H' and location[1] + length > cols) or \
+                (orientation == 'V' and location[0] + length > rows):
+            return False
+        intersections = 0
+        is_valid = 0
+        for i in range(length):
+            if orientation == 'H':
+                cell = self.grid[location[0]][location[1] + i].tile
+            else:
+                cell = self.grid[location[0] + i][location[1]].tile
+            if cell is not None:
+                intersections += 1
+                if cell.letter == word[i]:
+                    is_valid += 1
+        if is_valid != 0 and intersections == is_valid:
+            return True
+        else:
+            return False
 
     def display_board(self, board):
         print("Tablero de Scrabble:")
