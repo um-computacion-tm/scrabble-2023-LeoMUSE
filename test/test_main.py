@@ -54,6 +54,10 @@ class TestMain(unittest.TestCase):
         result = show_player(self)
         self.assertEqual(result, "Player 1")
 
+    @patch('builtins.print')
+    def test_show_board(self, print_patched):
+        show_board()
+
     # @patch('builtins.print')
     # @patch('game.main.show_player')
     # @patch('game.main.show_board')

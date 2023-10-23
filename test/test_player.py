@@ -15,26 +15,13 @@ class TestPlayer(unittest.TestCase):
         word = [Tile('H', 2), Tile('E', 1), Tile('L', 1), Tile('O', 1)]
         result = player.validate_tiles_in_word(word)
         self.assertTrue(result)
-
-    def test_validate_tiles_in_word_insufficient_tiles(self):
-        player = Player()
-        player.tiles = [Tile('E', 1), Tile('L', 1), Tile('O', 1)]
-        tiles_to_validate = [Tile('H', 1), Tile('E', 1), Tile('L', 3), Tile('O', 1)]
-        
-        with self.assertRaises(InsufficientTilesInHand) as context:
-            player.validate_tiles_in_word(tiles_to_validate)
-
-        self.assertEqual(str(context.exception),"No tienes los tiles necesarios")
     
-    def test_validate_tiles_in_word_increase_count(self):
+    def test_validate_tiles_in_word_invalid(self):
         player = Player()
         player.tiles = [Tile('H', 2), Tile('E', 1), Tile('L', 3), Tile('O', 1)]
         tiles_to_validate = [Tile('H', 1), Tile('E', 1), Tile('L', 1), Tile('L', 1), Tile('O', 1)]
-
-        with self.assertRaises(InsufficientTilesInHand) as context:
-            player.validate_tiles_in_word(tiles_to_validate)
-
-        self.assertEqual(str(context.exception), "No tienes los tiles necesarios")
+        result = player.validate_tiles_in_word(tiles_to_validate)
+        self.assertFalse(result)
 
     def test_assign_wildcard_value(self):
         player = Player()
@@ -64,6 +51,22 @@ class TestPlayer(unittest.TestCase):
         self.assertFalse(player.passed_turn)
         player.pass_turn_player()
         self.assertTrue(player.passed_turn)
+
+    def test_get_score(self):
+        player = Player()
+        player.score = 42
+        self.assertEqual(player.get_score(), 42)
+
+    def test_get_tiles(self):
+        player = Player()
+        player.tiles = [Tile('A', 1), Tile('B', 3), Tile('C', 3)]
+        tiles = player.get_tiles()
+        expected_tiles = [Tile('A', 1), Tile('B', 3), Tile('C', 3)]
+        self.assertEqual(
+            [(tile.letter, tile.value) for tile in tiles],
+            [(tile.letter, tile.value) for tile in expected_tiles]
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

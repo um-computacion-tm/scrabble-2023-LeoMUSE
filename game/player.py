@@ -1,4 +1,5 @@
 from game.tile import Tile
+from collections import Counter
 
 class InsufficientTilesInHand(Exception):
     pass
@@ -17,20 +18,14 @@ class Player:
         self.passed_turn = True
         
     def validate_tiles_in_word(self, tiles=[]):
-        player_tiles = [tile.letter.upper() for tile in self.tiles]
-        word_tiles = [tile.letter.upper() for tile in tiles]
-        needed_tiles = {}
-        
-        for letter in word_tiles:
-            if letter in needed_tiles:
-                needed_tiles[letter] += 1
-            else:
-                needed_tiles[letter] = 1
-        
+        player_tiles = [tile.letter for tile in self.tiles]
+        word_tiles = [tile.letter for tile in tiles]
+        needed_tiles = Counter(word_tiles)
+
         for letter, count in needed_tiles.items():
             if player_tiles.count(letter) < count:
-                raise InsufficientTilesInHand(f"No tienes los tiles necesarios")
-        
+                return False
+            
         return True
     
     def assign_wildcard_value(self,letter, value):
@@ -41,5 +36,11 @@ class Player:
                 self.tiles.append(new_tile)
             return True
     
+    def get_score(self):
+        return self.score
+    
+    def get_tiles(self):
+        return self.tiles
+
 if __name__ == '__main__':
     pass

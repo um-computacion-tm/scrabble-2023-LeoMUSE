@@ -133,4 +133,9 @@ All notable changes to this project will be documented in this file.
 - Added validate word conected metod.
 
 ## [0.2.8] - 2023-10-21 
-- Added metodod to to verify that the word dont overlap letterts that already are in the board
+
+- Added metodod to to verify that the word dont overlap letterts that already are in the board.
+
+## [0.2.9] - 2023-10-22
+
+- Repared function show_board of main.py .

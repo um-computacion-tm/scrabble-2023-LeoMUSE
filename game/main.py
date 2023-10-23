@@ -16,7 +16,9 @@ def get_player_count():
 
 def show_board():
     board = Board()
-    return board.display_board()
+    game = ScrabbleGame(players_count=3)
+    board_display = game.board.display_board(board)
+    print(board_display)
 
 def show_player(self):
     return ScrabbleGame.get_current_player()

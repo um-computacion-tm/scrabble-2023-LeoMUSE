@@ -114,17 +114,14 @@ class TestScrabbleGame(unittest.TestCase):
         expected_output = """[B,2] [C,3] [D,3] [E,1] [F,4] [G,2] [H,4] """
         self.assertEqual(output, expected_output)
 
-    # def test_validate_word_valid(self):
-    #     game = ScrabbleGame(2)
-    #     player = Player()
-    #     player.tiles = [Tile('C', 3), Tile('A', 1), Tile('S', 1), Tile('A', 1)]
-    #     word = [Tile('C', 3), Tile('A', 1), Tile('S', 1), Tile('A', 1)]
-    #     location = (7, 7)
-    #     orientation = "H"
-
-    #     game.board.set_multiplier_cord((7, 7), "word", 2)
-    #     game.validate_word(word, location, orientation)
-
+    def test_validate_word_player_tiles_insufficient(self):
+        game = ScrabbleGame(players_count = 3)
+        game.players[0].tiles = []
+        word = [Tile('A', 1)]
+        location = (7, 7)
+        orientation = "H"
+        with self.assertRaises(ValueError):
+            game.validate_word(word, location, orientation)
 
 if __name__ == '__main__':
     unittest.main()
