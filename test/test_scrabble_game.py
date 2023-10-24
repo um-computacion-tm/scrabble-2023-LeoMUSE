@@ -122,6 +122,6 @@ class TestScrabbleGame(unittest.TestCase):
         orientation = "H"
         with self.assertRaises(ValueError):
             game.validate_word(word, location, orientation)
-
+         
 if __name__ == '__main__':
     unittest.main()

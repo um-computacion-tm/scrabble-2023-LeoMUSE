@@ -139,3 +139,9 @@ All notable changes to this project will be documented in this file.
 ## [0.2.9] - 2023-10-22
 
 - Repared function show_board of main.py .
+
+## [0.3.0] - 2023-10-24
+
+- Added metod to remove the tiles from the player that used the word.
+
+- Added __eq__ to tile to comparate from letter and value and not the memory directory.

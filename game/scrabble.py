@@ -81,6 +81,6 @@ class ScrabbleGame:
         current_player = self.players[self.current_player]
         current_player.score += total
         self.next_turn()
-
+        
 if __name__ == '__main__':
     pass

@@ -28,6 +28,13 @@ class Player:
             
         return True
     
+    def remove_letters(self, word):
+        for letter in word:
+            for tile in self.tiles:
+                if tile == letter:
+                    self.tiles.remove(tile)
+                    break
+    
     def assign_wildcard_value(self,letter, value):
         for tile in self.tiles:
             if tile.value == 0:

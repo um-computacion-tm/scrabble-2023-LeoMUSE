@@ -67,6 +67,20 @@ class TestPlayer(unittest.TestCase):
             [(tile.letter, tile.value) for tile in expected_tiles]
         )
 
+    def test_remove_letters(self):
+        player = Player()
+        player.tiles = [Tile('C', 3), Tile('A', 1), Tile('S', 2), Tile('A', 1)]
+
+        # Let's assume you are removing the word "CASA" from the player's tiles.
+        word = [Tile('C', 3), Tile('A', 1), Tile('S', 2)]
+        player.remove_letters(word)
+
+        expected_tiles = [Tile('A', 1)]
+
+        # Check if the tiles in player are equal to the expected tiles
+        self.assertEqual(player.tiles, expected_tiles)
+
+
 
 if __name__ == '__main__':
     unittest.main()
