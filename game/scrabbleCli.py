@@ -74,6 +74,7 @@ class ScrabbleCli:
             print(f"{index:<12} {player_score:<10}")
 
     def player_turn(self):
+        self.draw_tiles()
         is_turn_finished = False
         while not is_turn_finished:
             action = input(' 1) Jugar Turno / 2) Mostrar Puntajes / 5) Salir ')
@@ -87,6 +88,7 @@ class ScrabbleCli:
                 break
 
     def playing(self, action_input=None):
+        self.draw_tiles()
         actions = {1: self.place_and_put_word, 2: self.exchange, 3: self.play_joker, 4: self.skip_turn}
         while not self.quit_game:
             if action_input is None:
@@ -248,17 +250,19 @@ class ScrabbleCli:
 
     def skip_turn(self):
         self.game.round += 1
-        response = input("Quieres Saltar el turno? (S/N): ")
-        if response.upper() == "S" or response.upper() == "s":
+        response = input("¿Quieres saltar el turno? (S/N): ")
+        if response.upper() == "S":
             print("----------------------------------------------------------------------------------------------------------------")
             print(f'ROUND N°{self.game.round}')
             print("----------------------------------------------------------------------------------------------------------------")            
-
+            
             self.game.next_turn()
-            self.draw_tiles()
+            
+            active_player = self.game.players[self.game.current_player]
+            
             self.show_board()
             print("----------------------------------------------------------------------------------------------------------------")    
-            self.show_tiles(player=Player)
+            self.show_tiles(player=active_player)
             print("----------------------------------------------------------------------------------------------------------------")    
         else:
             return "Ingrese una Palabra."
