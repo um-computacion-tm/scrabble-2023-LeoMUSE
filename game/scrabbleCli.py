@@ -174,6 +174,11 @@ class ScrabbleCli:
             location_x = self.game.comprobate_is_a_number(location_x)
             location_y = input('Columna (0-14): ')
             location_y = self.game.comprobate_is_a_number(location_y)
+
+            if not (0 <= location_x <= 14) or not (0 <= location_y <= 14):
+                print('Coordenadas fuera de los límites del tablero. Inténtalo de nuevo.')
+                continue
+
             location = (location_x, location_y)
             orientation = input('Orientacion (V/H): ')
             orientation = orientation.strip().upper()
