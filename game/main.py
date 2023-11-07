@@ -1,9 +1,8 @@
-#rom game.scrabble import ScrabbleGame
-#from game.board import Board
-#from game.player import Player
+from game.scrabbleCli import ScrabbleCli
 
-#def main():
-#    pass
+def main():
+    cliente = ScrabbleCli(player_count = 0)
+    cliente.start_game()
 
-#if __name__ == '__main__':
-#    main()
+if __name__ == '__main__':
+    main()
