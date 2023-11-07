@@ -174,46 +174,64 @@ class ScrabbleCli:
             word = input('Ingrese una Palabra (0 para Pasar): ')
             if word == '0':
                 return word, None, None
-            location_x = input('Fila (0-14): ')
-            location_x = self.game.comprobate_is_a_number(location_x)
-            location_y = input('Columna (0-14): ')
-            location_y = self.game.comprobate_is_a_number(location_y)
+            
+            location_x = None
+            location_y = None
 
-            if not (0 <= location_x <= 14) or not (0 <= location_y <= 14):
-                print('Coordenadas fuera de los límites del tablero. Inténtalo de nuevo.')
-                continue
+            while location_x is None or location_y is None:
+                location_x_input = input('Fila (0-14): ')
+                location_x = self.game.comprobate_is_a_number(location_x_input)
+                if location_x is None:
+                    print('¡¡Fila tiene que ser un número!!')
+                elif not (0 <= location_x <= 14):
+                    print('La fila debe estar entre 0 y 14.')
+                    location_x = None
+
+                location_y_input = input('Columna (0-14): ')
+                location_y = self.game.comprobate_is_a_number(location_y_input)
+                if location_y is None:
+                    print('¡¡Columna tiene que ser un número!!')
+                elif not (0 <= location_y <= 14):
+                    print('La columna debe estar entre 0 y 14.')
+                    location_y = None
 
             location = (location_x, location_y)
-            orientation = input('Orientacion (V/H): ')
+            
+            orientation = input('Orientación (V/H): ')
             orientation = orientation.strip().upper()
             orientation = self.game.comprobate_is_an_orientation(orientation)
             return word, location, orientation
-        
+            
     def exchange(self):
         player = self.game.players[self.game.current_player]
         while True:
-            tiles_to_exchange = input("Elija que tiles quiere cambiar ; '0' para no cambiar ninguna ): ")
+            tiles_to_exchange = input("Elija qué fichas quiere cambiar (ingrese números del 1 al 7 separados por espacios, o '0' para no cambiar ninguna): ")
             if tiles_to_exchange == '0':
-                break
-            tiles_to_exchange = list(tiles_to_exchange)
-            if all(tile.isnumeric() and 1 <= int(tile) <= 7 for tile in tiles_to_exchange):
-                tiles_to_exchange = [int(tile) - 1 for tile in tiles_to_exchange]
-                if all(0 <= index < len(player.tiles) for index in tiles_to_exchange):
-                    exchanged_tiles, new_tiles = player.exchange_tiles(self.game.bag_tiles, tiles_to_exchange)
-                    print('----------------------------------------------------------------------------------------------------------------')
-                    print(f'{self.game.bag_tiles}')
-                    print('----------------------------------------------------------------------------------------------------------------')
-                    print(f"Fichas Cambiadas: {[tile for tile in exchanged_tiles]}")
-                    print('----------------------------------------------------------------------------------------------------------------')
-                    print(f"Nueva Ficha: {[tile for tile in new_tiles]}")
-                    print('----------------------------------------------------------------------------------------------------------------')
-                    print(f'Nuevas Fichas: {player.tiles}')
-                    self.force_skip() 
-                    break
+                break 
+            
+            tiles_to_exchange = tiles_to_exchange.split()
+            selected_indices = []
+            
+            for tile in tiles_to_exchange:
+                if tile.isnumeric():
+                    index = int(tile) - 1
+                    if 0 <= index < len(player.tiles):
+                        selected_indices.append(index)
+                    else:
+                        print("Índice fuera de rango. Intente nuevamente.")
                 else:
-                    print("No es un Indice. (0-7), Pruebe otro.")
-            else:
-                print("No es un indice, Por favor ingrese un indice o '0' para terminar).")
+                    print("Entrada inválida. Ingrese números separados por espacios o '0' para no cambiar fichas.")
+
+            if selected_indices:
+                exchanged_tiles, new_tiles = player.exchange_tiles(self.game.bag_tiles, selected_indices)
+                print('----------------------------------------------------------------------------------------------------------------')
+                print(f"Fichas Cambiadas: {[tile for tile in exchanged_tiles]}")
+                print('----------------------------------------------------------------------------------------------------------------')
+                print(f"Nuevas Fichas: {[tile for tile in new_tiles]}")
+                print('----------------------------------------------------------------------------------------------------------------')
+                print(f'Nuevas Fichas: {player.tiles}')
+                self.force_skip() 
+                break
 
     def force_skip(self):
         self.game.next_turn()
