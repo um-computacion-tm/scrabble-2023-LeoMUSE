@@ -1,6 +1,7 @@
 from game.scrabble import ScrabbleGame, NoValidWordException, NoLettersExeption
 from game.player import Player
-from game.board import NoCenterLetterException
+from game.board import NoCenterLetterException , NoWordConnectedException
+
 
 class ScrabbleCli:
     def __init__(self, player_count):
@@ -97,8 +98,11 @@ class ScrabbleCli:
             if action_function is None:
                 print('Debe Seleccionar una accion.')
             else:
-                if action_function():
-                    return True
+                try:
+                    if action_function():
+                        return True
+                except NoWordConnectedException:
+                    print('La palabra tiene que estar conectada. Inténtalo de nuevo.')
                 
     def play_joker(self):
         current_player = self.game.players[self.game.current_player]
