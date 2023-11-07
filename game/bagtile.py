@@ -4,7 +4,7 @@ from game.tile import Tile
 class BagTiles:
     def __init__(self):
         tile_counts = {
-            ('', 0): 2,
+            (' ', 0): 2,
             ('A', 1): 12,
             ('E', 1): 12,
             ('I', 1): 6,
@@ -31,9 +31,17 @@ class BagTiles:
             ('X', 8): 1,
             ('Z', 10): 1,
         }
+    
+        self.initial_tile_count = 103
 
         self.tiles = [Tile(letter, value) for (letter, value), count in tile_counts.items() for _ in range(count)]
         random.shuffle(self.tiles)
+
+    def __str__(self):
+        return f"Tiles in bag: {len(self.tiles)}"
+
+    def tiles_in_bag(self):
+        return len(self.tiles)
         
     def take(self, count):
         if count > len(self.tiles):
@@ -45,6 +53,8 @@ class BagTiles:
 
     def put(self, tiles):
         self.tiles.extend(tiles)
+        self.initial_tile_count += len(tiles)
+        random.shuffle(self.tiles)
 
 if __name__ == '__main__':
     pass

@@ -1,43 +1,26 @@
 import unittest
-from game.dictionary import Dictionary
-from game.board import Board
-from game.cell import Cell
-from game.tile import Tile
+from unittest.mock import patch
+from game.dictionary import word_in_dictionary, DictionaryConnectionFailedException
 
 class TestDictionary(unittest.TestCase):
-    def test_dictionary_true(self):
-        board = Board()
-        dictionary = Dictionary()
-        cell1 = Cell(multiplier=1,multiplier_type=False)
-        cell1.add_letter(Tile('C', 1)) 
-        cell2 = Cell(multiplier=1,multiplier_type=False)
-        cell2.add_letter(Tile('A', 1))
-        cell3 = Cell(multiplier=1,multiplier_type=False)
-        cell3.add_letter(Tile('S', 2))
-        cell4 = Cell(multiplier=1,multiplier_type=False)
-        cell4.add_letter(Tile('A', 1))
-
-        word = [cell1, cell2, cell3, cell4]
-
-        file_path = dictionary.file_path
-        self.assertEqual(board.check_word(word, file_path), True)
-
-    def test_dictionary_false(self):
-        board = Board()
-        dictionary = Dictionary()
-        cell1 = Cell(multiplier=1,multiplier_type=False)
-        cell1.add_letter(Tile('C', 1)) 
-        cell2 = Cell(multiplier=1,multiplier_type=False)
-        cell2.add_letter(Tile('S', 2))
-        cell3 = Cell(multiplier=1,multiplier_type=False)
-        cell3.add_letter(Tile('S', 2))
-        cell4 = Cell(multiplier=1,multiplier_type=False)
-        cell4.add_letter(Tile('A', 1))
-
-        word = [cell1, cell2, cell3, cell4]
+    @patch('pyrae.dle.search_by_word')
+    def test_word_in_dictionary(self, mock_search_by_word):
+        word = "queso"
+        mock_search_by_word.return_value.title = "queso | Definición | Diccionario de la lengua española | RAE - ASALE"
+        self.assertEqual(word_in_dictionary(word), True)
         
-        file_path = dictionary.file_path
-        self.assertEqual(board.check_word(word, file_path), False)
+    @patch('pyrae.dle.search_by_word')
+    def test_word_not_in_dictionary(self, mock_search_by_word):
+        word = "asdasdwadas"
+        mock_search_by_word.return_value.title = "Diccionario de la lengua española | Edición del Tricentenario | RAE - ASALE"
+        self.assertEqual(word_in_dictionary(word), False)
+    
+    @patch('pyrae.dle.search_by_word')
+    def test_busqueda_fallo(self, mock_search_by_word):
+        word = "auto"
+        mock_search_by_word.return_value = None
+        with self.assertRaises(DictionaryConnectionFailedException):
+            word_in_dictionary(word)
 
-if __name__ == '__main__':
+if __name__ == '_main_':
     unittest.main()

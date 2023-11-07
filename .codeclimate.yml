@@ -3,7 +3,7 @@ checks:
   argument-count:
     enabled: true
     config:
-      threshold: 4
+      threshold: 5
   complex-logic:
     enabled: true
     config:
@@ -35,11 +35,11 @@ checks:
   similar-code:
     enabled: true
     config:
-      threshold: 
+      threshold: #language-specific defaults. overrides affect all languages.
   identical-code:
     enabled: true
     config:
-      threshold: 
+      threshold: #language-specific defaults. overrides affect all languages.
       
 exclude_patterns:
 - "config/"

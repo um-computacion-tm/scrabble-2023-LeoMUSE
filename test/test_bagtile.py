@@ -2,6 +2,7 @@ import unittest
 
 from game.bagtile import BagTiles
 from game.tile import Tile
+from game.player import Player
 
 from unittest.mock import patch
 
@@ -29,6 +30,11 @@ class TestBagTiles(unittest.TestCase):
         put_tiles = [Tile('Z', 1), Tile('Y', 1)]
         bag.put(put_tiles)
         self.assertEqual(len(bag.tiles),105,)
+
+    def test_tiles_in_bag(self):
+        bag = BagTiles()
+        bag.tiles = ['A', 'B', 'C', 'D', 'E']
+        self.assertEqual(bag.tiles_in_bag(), 5)
 
 if __name__ == '__main__':
     unittest.main()
