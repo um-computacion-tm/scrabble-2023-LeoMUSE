@@ -59,10 +59,13 @@ class Player:
     
     def exchange_tiles(self, bag, tiles_to_exchange):
             exchanged_tiles = [self.tiles[index] for index in tiles_to_exchange]
+            
             for index in sorted(tiles_to_exchange, reverse=True):
                 del self.tiles[index]
+
             new_tiles = bag.take(len(exchanged_tiles))
             self.tiles.extend(new_tiles)
+            bag.tiles.extend(exchanged_tiles)
             return exchanged_tiles, new_tiles
     
     def add_score(self, amount):

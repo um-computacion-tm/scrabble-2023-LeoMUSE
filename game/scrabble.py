@@ -121,7 +121,7 @@ class ScrabbleGame:
 
         for letter in word:
             if letter == ' ':
-                continue  # Ignora espacios en blanco (jokers)
+                continue 
             
             if orientation == 'H':
                 cell = board[row][col]
@@ -143,9 +143,6 @@ class ScrabbleGame:
         tiles_on_board = self.get_tiles_on_board(word, location, orientation)
 
         player.tiles.extend(tiles_on_board)
-
-        # print(f'{player.tiles}')
-        
 
         if player.validate_tiles_in_word(word, player.tiles):
             return True

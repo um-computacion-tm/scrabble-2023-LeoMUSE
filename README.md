@@ -14,7 +14,7 @@ git clone https://github.com/um-computacion-tm/scrabble-2023-LeoMUSE.git
 ```
 - Install Docker.
 ```
-docker build -t [image name]
+docker build -t [image name] .
 ```
 - Go to the file address.
 ```
