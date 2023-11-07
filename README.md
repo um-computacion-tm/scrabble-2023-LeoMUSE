@@ -12,7 +12,7 @@ sudo pat-get install git
 ```
 git clone https://github.com/um-computacion-tm/scrabble-2023-LeoMUSE.git
 ```
-- Install Docker.
+- Create The image.
 ```
 docker build -t [image name] .
 ```
