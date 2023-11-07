@@ -1,6 +1,6 @@
-from game.scrabble import ScrabbleGame,NoValidWordException, NoLettersExeption
+from game.scrabble import ScrabbleGame, NoValidWordException, NoLettersExeption
 from game.player import Player
-from game.board import Board,NoCenterLetterException
+from game.board import NoCenterLetterException
 
 class ScrabbleCli:
     def __init__(self, player_count):
@@ -183,7 +183,7 @@ class ScrabbleCli:
     def exchange(self):
         player = self.game.players[self.game.current_player]
         while True:
-            tiles_to_exchange = input("Elija que tiles quiere cambiar ; '0' Elija para no cambiar ninguna ): ")
+            tiles_to_exchange = input("Elija que tiles quiere cambiar ; '0' para no cambiar ninguna ): ")
             if tiles_to_exchange == '0':
                 break
             tiles_to_exchange = list(tiles_to_exchange)
@@ -191,6 +191,8 @@ class ScrabbleCli:
                 tiles_to_exchange = [int(tile) - 1 for tile in tiles_to_exchange]
                 if all(0 <= index < len(player.tiles) for index in tiles_to_exchange):
                     exchanged_tiles, new_tiles = player.exchange_tiles(self.game.bag_tiles, tiles_to_exchange)
+                    print('----------------------------------------------------------------------------------------------------------------')
+                    print(f'{self.game.bag_tiles}')
                     print('----------------------------------------------------------------------------------------------------------------')
                     print(f"Fichas Cambiadas: {[tile for tile in exchanged_tiles]}")
                     print('----------------------------------------------------------------------------------------------------------------')

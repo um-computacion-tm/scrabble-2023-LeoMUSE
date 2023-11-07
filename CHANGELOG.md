@@ -219,3 +219,4 @@ All notable changes to this project will be documented in this file.
 - Added Dockerfile
 - Modified README.md
 - Repared tests
+- Repared metod exchange_tiles
