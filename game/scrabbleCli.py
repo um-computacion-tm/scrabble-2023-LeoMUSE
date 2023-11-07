@@ -206,34 +206,44 @@ class ScrabbleCli:
             
     def exchange(self):
         player = self.game.players[self.game.current_player]
+        
         while True:
             tiles_to_exchange = input("Elija qué fichas quiere cambiar (ingrese números del 1 al 7 separados por espacios, o '0' para no cambiar ninguna): ")
+            
             if tiles_to_exchange == '0':
                 break 
-            
-            tiles_to_exchange = tiles_to_exchange.split()
-            selected_indices = []
-            
-            for tile in tiles_to_exchange:
-                if tile.isnumeric():
-                    index = int(tile) - 1
-                    if 0 <= index < len(player.tiles):
-                        selected_indices.append(index)
-                    else:
-                        print("Índice fuera de rango. Intente nuevamente.")
-                else:
-                    print("Entrada inválida. Ingrese números separados por espacios o '0' para no cambiar fichas.")
 
+            selected_indices = self.get_selected_indices(tiles_to_exchange, player)
+            
             if selected_indices:
                 exchanged_tiles, new_tiles = player.exchange_tiles(self.game.bag_tiles, selected_indices)
-                print('----------------------------------------------------------------------------------------------------------------')
-                print(f"Fichas Cambiadas: {[tile for tile in exchanged_tiles]}")
-                print('----------------------------------------------------------------------------------------------------------------')
-                print(f"Nuevas Fichas: {[tile for tile in new_tiles]}")
-                print('----------------------------------------------------------------------------------------------------------------')
-                print(f'Nuevas Fichas: {player.tiles}')
-                self.force_skip() 
+                self.print_exchange_results(exchanged_tiles, new_tiles, player)
+                self.force_skip()
                 break
+
+    def get_selected_indices(self, tiles_to_exchange, player):
+        selected_indices = []
+        tiles = tiles_to_exchange.split()
+        
+        for tile in tiles:
+            if tile.isnumeric():
+                index = int(tile) - 1
+                if 0 <= index < len(player.tiles):
+                    selected_indices.append(index)
+                else:
+                    print("Índice fuera de rango. Intente nuevamente.")
+            else:
+                print("Entrada inválida. Ingrese números separados por espacios o '0' para no cambiar fichas.")
+        
+        return selected_indices
+
+    def print_exchange_results(self, exchanged_tiles, new_tiles, player):
+        print('----------------------------------------------------------------------------------------------------------------')
+        print(f"Fichas Cambiadas: {[tile for tile in exchanged_tiles]}")
+        print('----------------------------------------------------------------------------------------------------------------')
+        print(f"Nuevas Fichas: {[tile for tile in new_tiles]}")
+        print('----------------------------------------------------------------------------------------------------------------')
+        print(f'Nuevas Fichas: {player.tiles}')
 
     def force_skip(self):
         self.game.next_turn()
